@@ -1,3 +1,3 @@
-export const Sum = (a: number, b: number): number => {
-  return a + b;
-};
+import { App } from './providers/App';
+
+new App().run();
