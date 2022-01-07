@@ -12,6 +12,9 @@ export class HttpConfig {
 
   static readonly MAX_REQUEST_URL_SIZE: string =
     process.env.MAX_REQUEST_URL_SIZE || '1kb';
+
+  static readonly IS_URL_EXTENDED: boolean =
+    process.env.IS_URL_EXTENDED !== 'false';
 }
 export class CorsConfig {
   /**
