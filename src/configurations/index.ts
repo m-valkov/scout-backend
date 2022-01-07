@@ -3,8 +3,15 @@ export class HttpConfig {
    * Which port to use for the server
    */
   static readonly PORT: number = Number(process.env.PORT) || 3000;
-  static readonly COMPRESSION_LEVEL: number = Number(process.env.COMPRESSION_LEVEL) || 0;
-  static readonly MAX_REQUEST_SIZE: string = process.env.MAX_REQUEST_SIZE || '2mb';
+
+  static readonly COMPRESSION_LEVEL: number =
+    Number(process.env.COMPRESSION_LEVEL) || 0;
+
+  static readonly MAX_REQUEST_BODY_SIZE: string =
+    process.env.MAX_REQUEST_BODY_SIZE || '2mb';
+
+  static readonly MAX_REQUEST_URL_SIZE: string =
+    process.env.MAX_REQUEST_URL_SIZE || '1kb';
 }
 export class CorsConfig {
   /**

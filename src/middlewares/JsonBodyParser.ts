@@ -3,5 +3,5 @@ import { HttpConfig } from '../configurations';
 import { Middleware } from '../interfaces/express';
 
 export const JsonBodyParser: Middleware = json({
-  limit: HttpConfig.MAX_REQUEST_SIZE,
+  limit: HttpConfig.MAX_REQUEST_BODY_SIZE,
 });
