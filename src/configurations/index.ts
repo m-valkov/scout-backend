@@ -4,6 +4,7 @@ export class HttpConfig {
    */
   static readonly PORT: number = Number(process.env.PORT) || 3000;
   static readonly COMPRESSION_LEVEL: number = Number(process.env.COMPRESSION_LEVEL) || 0;
+  static readonly MAX_REQUEST_SIZE: string = process.env.MAX_REQUEST_SIZE || '2mb';
 }
 export class CorsConfig {
   /**
