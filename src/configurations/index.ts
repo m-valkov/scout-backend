@@ -2,7 +2,8 @@ export class HttpConfig {
   /**
    * Which port to use for the server
    */
-  static readonly PORT: string = process.env.PORT || '3000';
+  static readonly PORT: number = Number(process.env.PORT) || 3000;
+  static readonly COMPRESSION_LEVEL: number = Number(process.env.COMPRESSION_LEVEL) || 0;
 }
 export class CorsConfig {
   /**
