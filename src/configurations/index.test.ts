@@ -5,7 +5,7 @@ test('Test default Domain name', () => {
 });
 
 test('Test default Port number', () => {
-  expect(HttpConfig.PORT).toBe('3000');
+  expect(HttpConfig.PORT).toBe(3000);
 });
 
 // test('Test default USE_CORS flag', () => {
