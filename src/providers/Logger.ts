@@ -5,6 +5,7 @@ import {
   Logger,
   format,
 } from 'winston';
+import { LoggerConfig } from '../configurations';
 
 const { combine, printf } = format;
 
@@ -19,10 +20,9 @@ const accessLoggerOptions: LoggerOptions = {
     }),
     new transports.File({
       level: 'debug',
-      filename: './logs/all-logs.log',
-      handleExceptions: true,
-      maxsize: 5242880, //5MB
-      maxFiles: 5,
+      filename: './logs/access.log',
+      maxsize: LoggerConfig.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES,
+      maxFiles: LoggerConfig.ACCESS_LOG_MAX_FILES,
     }),
   ],
 };
