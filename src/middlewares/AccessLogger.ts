@@ -2,12 +2,12 @@ import { AccessLogger } from '../providers/Logger';
 import morgan from 'morgan';
 import { Middleware } from '../interfaces/express';
 
-class MyStream {
+class MorganStream {
   write(text: string) {
     AccessLogger.info(text);
   }
 }
 
-const myStream = new MyStream();
+const stream = new MorganStream();
 
-export const Logger: Middleware = morgan('combined', { stream: myStream });
+export const Logger: Middleware = morgan('combined', { stream });
