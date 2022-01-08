@@ -5,10 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "transpile": "tsc --build",
+    "build": "tsc --build",
     "clean": "tsc --build --clean",
     "postBuild": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json && cd dist && npm ci --production",
-    "build": "npm-run-all clean transpile postBuild",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
   "keywords": [],
