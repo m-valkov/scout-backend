@@ -27,6 +27,7 @@ export class LoggerConfig {
   static readonly ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES: number = Number(
     process.env.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES || 10_485_760,
   );
+
   static readonly ACCESS_LOG_MAX_FILES: number =
     Number(process.env.ACCESS_LOG_MAX_FILES) || 5;
 }
@@ -43,14 +44,20 @@ export class APIConfig {
 
 export class SwaggerConfig {
   static readonly URL_PREFIX: string = process.env.SWAGGER_PREFIX || '/doc';
+
   static readonly OPENAPI_VERSION: string =
     process.env.OPENAPI_VERSION || '3.0.0';
+
   static readonly TITLE: string =
     process.env.SWAGGER_TITLE || 'Api documentation';
+
   static readonly API_VERSION: string = process.env.API_VERSION || '1.0.0';
+
   static readonly SERVER_URL: string =
     process.env.SERVER_URL || 'http://localhost:3000/docs';
+
   static readonly SERVER_DESCRIPTION: string =
     process.env.SERVER_DESCRIPTION || 'Dev server';
+
   static readonly DOCS_ENDPOINT: string = process.env.DOCS_ENDPOINT || '/docs';
 }
