@@ -7,7 +7,7 @@ import { BasicAuth } from '../middlewares/BasicAuth';
 const swaggerDefinition: SwaggerDefinition = {
   openapi: SwaggerConfig.OPENAPI_VERSION,
   info: {
-    title: SwaggerConfig.TITLE,
+    title: SwaggerConfig.SWAGGER_TITLE,
     version: SwaggerConfig.API_VERSION,
   },
   servers: [
