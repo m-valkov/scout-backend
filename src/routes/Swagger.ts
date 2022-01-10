@@ -2,7 +2,6 @@ import { SwaggerConfig } from '../configurations';
 import swaggerJSDoc, { Options, SwaggerDefinition } from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Router } from 'express';
-import { BasicAuth } from '../middlewares/BasicAuth';
 
 const swaggerDefinition: SwaggerDefinition = {
   openapi: SwaggerConfig.OPENAPI_VERSION,
@@ -30,7 +29,6 @@ export const Swagger: Router = Router();
 
 Swagger.use(
   SwaggerConfig.DOCS_ENDPOINT,
-  BasicAuth,
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec),
 );
