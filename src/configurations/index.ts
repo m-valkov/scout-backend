@@ -39,11 +39,11 @@ export class CorsConfig {
 }
 
 export class APIConfig {
-  static readonly URL_PREFIX: string = process.env.API_PREFIX || '/api';
+  static readonly API_PREFIX: string = process.env.API_PREFIX || '/api';
 }
 
 export class SwaggerConfig {
-  static readonly URL_PREFIX: string = process.env.SWAGGER_PREFIX || '/doc';
+  static readonly SWAGGER_PREFIX: string = process.env.SWAGGER_PREFIX || '/doc';
 
   static readonly OPENAPI_VERSION: string =
     process.env.OPENAPI_VERSION || '3.0.0';
