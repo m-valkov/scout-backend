@@ -21,6 +21,9 @@ export class HttpConfig {
 
   static readonly RATE_LIMIT_MAX_REQUESTS: number =
     Number(process.env.RATE_LIMIT_MAX_REQUESTS) || 100;
+
+  static readonly BASIC_AUTH_PASSWORD: string =
+    process.env.BASIC_AUTH_PASSWORD || 'password';
 }
 
 export class LoggerConfig {
