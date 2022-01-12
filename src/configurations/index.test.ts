@@ -1,25 +1,5 @@
-import { APIConfig, CorsConfig, HttpConfig, SwaggerConfig } from './index';
+import { HttpConfig } from './Http';
 
 test('Test default Domain name', () => {
-  expect(CorsConfig.DOMAIN).toBe('localhost');
-});
-
-test('Test default Port number', () => {
-  expect(HttpConfig.PORT).toBe(3000);
-});
-
-// test('Test default USE_CORS flag', () => {
-//   expect(HttpConfig.USE_CORS).toBe(true);
-// });
-
-// test('Test default USE_HELMET flag', () => {
-//   expect(HttpConfig.USE_HELMET).toBe(true);
-// });
-
-test('Test default Api prefix', () => {
-  expect(APIConfig.API_PREFIX).toBe('/api');
-});
-
-test('Test default Swagger prefix', () => {
-  expect(SwaggerConfig.SWAGGER_PREFIX).toBe('/doc');
+  expect(HttpConfig.DOMAIN).toBe('localhost');
 });
