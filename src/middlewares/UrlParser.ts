@@ -1,5 +1,5 @@
 import { urlencoded } from 'express';
-import { HttpConfig } from '../configurations';
+import { HttpConfig } from '../configurations/Http';
 import { Middleware } from '../interfaces/express';
 
 export const UrlParser: Middleware = urlencoded({

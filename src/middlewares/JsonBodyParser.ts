@@ -1,5 +1,5 @@
 import { json } from 'express';
-import { HttpConfig } from '../configurations';
+import { HttpConfig } from '../configurations/Http';
 import { Middleware } from '../interfaces/express';
 
 export const JsonBodyParser: Middleware = json({

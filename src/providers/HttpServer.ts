@@ -1,5 +1,5 @@
 import express, { Application, Router } from 'express';
-import { HttpConfig } from '../configurations';
+import { HttpConfig } from '../configurations/Http';
 import { Middleware } from '../interfaces/express';
 
 export class HttpServer {

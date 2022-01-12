@@ -1,4 +1,4 @@
-import { SwaggerConfig } from '../configurations';
+import { SwaggerConfig } from '../configurations/Swagger';
 import swaggerJSDoc, { Options, SwaggerDefinition } from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Router } from 'express';
@@ -27,8 +27,4 @@ const swaggerSpec = swaggerJSDoc(jsdocOptions);
 
 export const Swagger: Router = Router();
 
-Swagger.use(
-  SwaggerConfig.DOCS_ENDPOINT,
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerSpec),
-);
+Swagger.use(SwaggerConfig.DOCS_ENDPOINT, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
