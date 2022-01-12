@@ -14,7 +14,7 @@ export class HttpConfig {
 
   static readonly IS_URL_EXTENDED: boolean = process.env.IS_URL_EXTENDED !== 'false';
 
-  static readonly RATE_LIMIT_WINDOWS_MS: number = Number(process.env.RATE_LIMIT_WINDOW_MS) || 6000;
+  static readonly RATE_LIMIT_WINDOWS_MS: number = Number(process.env.RATE_LIMIT_WINDOWS_MS) || 6000;
 
   static readonly RATE_LIMIT_MAX_REQUESTS: number = Number(process.env.RATE_LIMIT_MAX_REQUESTS) || 100;
 
