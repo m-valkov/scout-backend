@@ -1,6 +1,4 @@
 export class SwaggerConfig {
-  static readonly SWAGGER_PREFIX: string = process.env.SWAGGER_PREFIX || '/doc';
-
   static readonly OPENAPI_VERSION: string = process.env.OPENAPI_VERSION || '3.0.0';
 
   static readonly SWAGGER_TITLE: string = process.env.SWAGGER_TITLE || 'Api documentation';
