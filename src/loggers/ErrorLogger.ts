@@ -1,10 +1,13 @@
 import { createLogger, transports, LoggerOptions, Logger, format } from 'winston';
 import { LoggerConfig } from '../configurations/Logger';
 
-const { combine, printf } = format;
+const { combine, printf, timestamp } = format;
 
 const errorLoggerOptions: LoggerOptions = {
-  format: combine(printf(info => `${info.level.toUpperCase()}: ${info.message}`)),
+  format: combine(
+    timestamp({ format: 'DD.MM.YYYY HH:mm:ss' }),
+    printf(info => `${info.level.toUpperCase()} :: ${info.timestamp} :: ${info.message}`),
+  ),
   transports: [
     new transports.File({
       level: 'error',
