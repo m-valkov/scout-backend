@@ -1,6 +1,6 @@
-import { Middleware } from '../interfaces/express';
+import { Middleware } from '../../interfaces/express';
 import expressBasicAuth, { BasicAuthMiddlewareOptions } from 'express-basic-auth';
-import { HttpConfig } from '../configurations/Http';
+import { HttpConfig } from '../../configurations/Http';
 
 const authOptions: BasicAuthMiddlewareOptions = {
   users: { developer: HttpConfig.BASIC_AUTH_PASSWORD },

@@ -6,4 +6,5 @@
   },
   "editor.tabSize": 2,
   "typescript.referencesCodeLens.enabled": true,
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }
