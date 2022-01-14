@@ -25,6 +25,6 @@ const jsdocOptions: Options = {
 // TODO: find types for that
 const swaggerSpec = swaggerJSDoc(jsdocOptions);
 
-export const ApiDoc: Router = Router();
+export const ApiDocHandler: Router = Router();
 
-ApiDoc.use(SwaggerConfig.DOCS_ENDPOINT, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+ApiDocHandler.use(SwaggerConfig.DOCS_ENDPOINT, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
