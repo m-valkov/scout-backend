@@ -1,7 +1,9 @@
 {
   "[typescript]": {
     "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.codeLens": true
   },
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "typescript.referencesCodeLens.enabled": true,
 }
