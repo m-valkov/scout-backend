@@ -12,7 +12,7 @@ export class HttpConfig {
 
   static readonly MAX_REQUEST_URL_SIZE: string = process.env.MAX_REQUEST_URL_SIZE || '1kb';
 
-  static readonly IS_URL_EXTENDED: boolean = process.env.IS_URL_EXTENDED !== 'false';
+  static readonly URL_EXTENDED_ENABLED: boolean = process.env.URL_EXTENDED_ENABLED !== 'false';
 
   static readonly RATE_LIMIT_WINDOWS_MS: number = Number(process.env.RATE_LIMIT_WINDOWS_MS) || 6000;
 
