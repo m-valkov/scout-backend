@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { Api404Handler } from '../handlers/Api404Handler';
 import { ErrorsCatcher } from '../middlewares/ErrorsCatcher';
+import { ErrorSender } from '../middlewares/ErrorsClientSender';
 import { HttpServer } from './HttpServer';
 import { Middlewares } from './Middlewares';
 import { Routes } from './Routes';
@@ -17,6 +18,7 @@ export class App {
     this.httpServer.mountRoutes(Routes);
     this.httpServer.mountMiddlewares([Api404Handler]);
     this.httpServer.mountErrorHandler(ErrorsCatcher);
+    this.httpServer.mountErrorHandler(ErrorSender);
     this.httpServer.listen();
   }
 }
