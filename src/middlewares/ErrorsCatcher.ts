@@ -4,9 +4,8 @@ import { DebugLogger } from '../loggers/DebugLogger';
 import { ErrorLogger } from '../loggers/ErrorLogger';
 
 export const ErrorsCatcher: ErrorRequestHandler = (err: BaseError, req: Request, res: Response, next: NextFunction): void => {
-  DebugLogger.debug(err.stack);
-
   if (err.isOperational) {
+    DebugLogger.debug(err.message);
     ErrorLogger.error(err.message);
   } else {
     ErrorLogger.error(err.stack);
