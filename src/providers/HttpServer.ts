@@ -17,8 +17,8 @@ export class HttpServer {
     this.transport.use(middlewares);
   }
 
-  public mountErrorHandler(errorHandler: ErrorRequestHandler): void {
-    this.transport.use(errorHandler);
+  public mountErrorHandlers(errorHandlers: ErrorRequestHandler[]): void {
+    this.transport.use(errorHandlers);
   }
 
   public listen(): void {

@@ -1,7 +1,7 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { BaseError } from '../exceptions/BaseError';
 
-export const ErrorSender: ErrorRequestHandler = (err: BaseError, _req: Request, res: Response, next: NextFunction): void => {
+export const ErrorClientSender: ErrorRequestHandler = (err: BaseError, _req: Request, res: Response, next: NextFunction): void => {
   const errorBody = {
     statusCode: err.statusCode,
     description: err.description,
