@@ -21,7 +21,7 @@ test('The default value for the MAX_REQUEST_URL_SIZE is set to.', () => {
 });
 
 test('The default value for the IS_URL_EXTENDED is set to.', () => {
-  expect(HttpConfig.IS_URL_EXTENDED).toBe(true);
+  expect(HttpConfig.URL_EXTENDED_ENABLED).toBe(true);
 });
 
 test('The default value for the RATE_LIMIT_WINDOW_MS is set to.', () => {
