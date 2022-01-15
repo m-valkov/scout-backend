@@ -8,6 +8,7 @@ export const ErrorsCatcher: ErrorRequestHandler = (err: BaseError, req: Request,
     DebugLogger.debug(err.message);
     ErrorLogger.error(err.message);
   } else {
+    DebugLogger.debug(err.stack);
     ErrorLogger.error(err.stack);
   }
   next(err);
