@@ -25,6 +25,8 @@ ACCESS_LOG_MAX_FILES='5'
 ERROR_LOG_MAX_FILE_SIZE_IN_BYTES='10_485_760'
 ERROR_LOG_MAX_FILES='5'
 SENTRY_DSN="your Snetry dsn like a https://<token>.senty.io/12345"
+TELEGRAM_BOT_TOKEN="****6424:AAH*****************ChJCwrX4fc"
+TELEGRAM_CHAT_ID="-1001********21"
 
 #swagger
 OPENAPI_VERSION='3.0.0'
