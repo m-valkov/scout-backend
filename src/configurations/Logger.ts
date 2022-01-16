@@ -6,4 +6,5 @@ export class LoggerConfig {
   static readonly ERROR_LOG_MAX_FILE_SIZE_IN_BYTES: number = Number(process.env.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES || 10_485_760);
 
   static readonly ERROR_LOG_MAX_FILES: number = Number(process.env.ERROR_LOG_MAX_FILES) || 5;
+  static readonly SENTRY_DSN: string = process.env.SENTRY_DSN || 'invalid dsn';
 }

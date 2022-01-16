@@ -50,6 +50,8 @@
     "passport": "^0.5.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-sentry-log": "^1.0.24",
+    "winston-transport-sentry-node": "^2.1.0"
   }
 }
