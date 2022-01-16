@@ -52,6 +52,7 @@
     "swagger-ui-express": "^4.3.0",
     "winston": "^3.3.3",
     "winston-sentry-log": "^1.0.24",
+    "winston-telegram": "^2.5.0",
     "winston-transport-sentry-node": "^2.1.0"
   }
 }

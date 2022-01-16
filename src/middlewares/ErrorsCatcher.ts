@@ -3,6 +3,7 @@ import { BaseError } from '../exceptions/BaseError';
 import { DebugLogger } from '../loggers/DebugLogger';
 import { ErrorLogger } from '../loggers/ErrorLogger';
 import { SentryLogger } from '../loggers/SentryLogger';
+import { TelegramLogger } from '../loggers/TelegramLogger';
 
 export const ErrorsCatcher: ErrorRequestHandler = (err: BaseError, req: Request, res: Response, next: NextFunction): void => {
   if (err.isOperational) {
@@ -12,6 +13,7 @@ export const ErrorsCatcher: ErrorRequestHandler = (err: BaseError, req: Request,
     DebugLogger.debug(err.stack);
     ErrorLogger.error(err.stack);
     SentryLogger.error(err.stack);
+    TelegramLogger.error(err.stack);
   }
   next(err);
 };
