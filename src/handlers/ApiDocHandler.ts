@@ -1,4 +1,5 @@
 import { SwaggerConfig } from '../configurations/Swagger';
+import { BasicAuth } from '../middlewares/vendor/BasicAuth';
 import swaggerJSDoc, { Options, SwaggerDefinition } from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Router } from 'express';
@@ -27,4 +28,4 @@ const swaggerSpec = swaggerJSDoc(jsdocOptions);
 
 export const ApiDocHandler: Router = Router();
 
-ApiDocHandler.use(SwaggerConfig.DOCS_ENDPOINT, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+ApiDocHandler.use(SwaggerConfig.DOCS_ENDPOINT, BasicAuth, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
