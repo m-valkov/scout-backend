@@ -8,7 +8,8 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "postBuild": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json && cd dist && npm ci --production",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "prod": "pm2 start dist/index.js -i max --watch"
   },
   "keywords": [],
   "author": "",
@@ -48,6 +49,7 @@
     "mongoose": "^6.1.4",
     "morgan": "^1.10.0",
     "passport": "^0.5.2",
+    "pm2": "^5.1.2",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0",
     "winston": "^3.3.3",
