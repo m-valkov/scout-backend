@@ -9,7 +9,8 @@
     "clean": "tsc --build --clean",
     "postBuild": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json && cd dist && npm ci --production",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "prod": "pm2 start dist/index.js -i max"
+    "prod": "pm2 start dist/index.js -i max",
+    "precommit": "jest"
   },
   "keywords": [],
   "author": "",
