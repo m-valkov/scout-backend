@@ -32,7 +32,7 @@ TELEGRAM_CHAT_ID="-1001********21"
 OPENAPI_VERSION='3.0.0'
 SWAGGER_TITLE='Api documentation'
 API_VERSION='1.0.0'
-SERVER_URL='http://localhost:3000/docs'
+SERVER_URL='http://localhost:3000/api'
 SERVER_DESCRIPTION='Dev server'
 DOCS_ENDPOINT='/docs'
 ```
