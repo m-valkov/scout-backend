@@ -9,7 +9,13 @@
     "clean": "tsc --build --clean",
     "postBuild": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json && cd dist && npm ci --production",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "prod": "pm2 start dist/index.js -i max"
+    "prod": "pm2 start dist/index.js -i max",
+    "make-badges": "istanbul-badges-readme"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && istanbul-badges-readme && git add 'README.md'"
+    }
   },
   "keywords": [],
   "author": "",
@@ -30,6 +36,8 @@
     "autocannon": "^7.5.1",
     "eslint": "^8.5.0",
     "eslint-plugin-import": "^2.25.3",
+    "husky": "^7.0.4",
+    "istanbul-badges-readme": "^1.8.1",
     "jest": "^27.4.5",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
