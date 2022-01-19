@@ -1,5 +1,5 @@
 import { createLogger, LoggerOptions, Logger } from 'winston';
-import { LoggerConfig } from '../configurations/Logger';
+import { LoggerConfig } from '../../configurations/Logger';
 import telegramTransport from 'winston-telegram';
 
 const errorLoggerOptions: LoggerOptions = {

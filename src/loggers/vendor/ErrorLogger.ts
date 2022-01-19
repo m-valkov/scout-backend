@@ -1,5 +1,5 @@
 import { createLogger, transports, LoggerOptions, Logger, format } from 'winston';
-import { LoggerConfig } from '../configurations/Logger';
+import { LoggerConfig } from '../../configurations/Logger';
 
 const { combine, printf, timestamp } = format;
 

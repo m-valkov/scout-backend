@@ -1,7 +1,7 @@
-import { AccessLogger } from '../../loggers/AccessLogger';
+import { AccessLogger } from '../../loggers/vendor/AccessLogger';
 import morgan from 'morgan';
 import { Middleware } from '../../interfaces/express';
-import { DebugLogger } from '../../loggers/DebugLogger';
+import { DebugLogger } from '../../loggers/vendor/DebugLogger';
 
 class MorganStream {
   write(text: string) {

@@ -1,5 +1,5 @@
 import { createLogger, transports, LoggerOptions, Logger, format } from 'winston';
-import { AppConfig } from '../configurations/App';
+import { AppConfig } from '../../configurations/App';
 
 const { combine, printf, timestamp, colorize } = format;
 
