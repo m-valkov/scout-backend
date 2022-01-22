@@ -3,7 +3,7 @@ import { HttpConfig } from '../configurations/Http';
 import { Middleware } from '../interfaces/express';
 
 export class HttpServer {
-  private transport: Application;
+  public transport: Application;
 
   constructor() {
     this.transport = express();

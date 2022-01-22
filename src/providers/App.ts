@@ -6,7 +6,7 @@ import { Middlewares } from './Middlewares';
 import { Routes } from './Routes';
 
 export class App {
-  private httpServer: HttpServer;
+  public httpServer: HttpServer;
 
   constructor() {
     this.httpServer = new HttpServer();
