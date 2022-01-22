@@ -1,4 +1,4 @@
-describe('Configuration tests', () => {
+describe('Configuration', () => {
   const OLD_ENV = process.env;
   beforeEach(() => {
     jest.resetModules();
@@ -9,7 +9,7 @@ describe('Configuration tests', () => {
     process.env = OLD_ENV;
   });
 
-  test('without .env file or env varables', async () => {
+  test('should use the default values', async () => {
     const { APIConfig } = await import('../configurations/Api');
     const { AppConfig } = await import('../configurations/App');
     const { HttpConfig } = await import('../configurations/Http');
@@ -46,7 +46,7 @@ describe('Configuration tests', () => {
     expect(SwaggerConfig.DOCS_ENDPOINT).toBe('/docs');
   });
 
-  test('with .env file or env variables', async () => {
+  test('should use the values of the environment variables', async () => {
     process.env.API_PREFIX = '/api/v1';
     process.env.NODE_ENV = 'production';
     process.env.PORT = '5000';
