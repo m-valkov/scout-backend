@@ -5,16 +5,15 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc --build",
-    "clean": "tsc --build --clean",
-    "postBuild": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json && cd dist && npm ci --production",
+    "build": "tsc --build --clean && tsc --build",
+    "post-build": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json && cd dist && npm ci --production",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "prod": "pm2 start dist/index.js -i max",
-    "make-badges": "istanbul-badges-readme"
+    "make-badges": "istanbul-badges-readme && git add 'README.md'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["typescript","rest", "express"],
+  "author": "Mikhail Valkov",
+  "license": "MIT",
   "devDependencies": {
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.12",
