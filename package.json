@@ -18,6 +18,9 @@
   ],
   "author": "Mikhail Valkov",
   "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "devDependencies": {
     "@types/compression": "^1.7.2",
     "@types/cors": "^2.8.12",
