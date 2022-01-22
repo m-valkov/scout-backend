@@ -35,7 +35,7 @@ describe('Configuration', () => {
     expect(LoggerConfig.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES).toBe(10_485_760);
     expect(LoggerConfig.ERROR_LOG_MAX_FILES).toBe(5);
     expect(LoggerConfig.SENTRY_DSN).toBe('');
-    expect(LoggerConfig.TELEGRAM_BOT_TOKEN).toBe('');
+    expect(LoggerConfig.TELEGRAM_BOT_TOKEN).toBe('token');
     expect(LoggerConfig.TELEGRAM_CHAT_ID).toBe(-1);
 
     expect(SwaggerConfig.OPENAPI_VERSION).toBe('3.0.0');
