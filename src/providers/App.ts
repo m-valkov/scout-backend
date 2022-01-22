@@ -15,8 +15,4 @@ export class App {
     this.httpServer.mountMiddlewares([Api404Handler]);
     this.httpServer.mountErrorHandlers(ErrorHandlers);
   }
-
-  public run(): void {
-    this.httpServer.listen();
-  }
 }

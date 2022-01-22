@@ -4,5 +4,5 @@ module.exports = {
   testEnvironment: 'node',
   collectCoverage: true,
   coverageReporters: ['clover', 'json', 'lcov', 'json-summary'],
-  collectCoverageFrom: ['src/**/*.ts', '!**/node_modules/**', '!**/vendor/**'],
+  collectCoverageFrom: ['src/**/*.ts', '!**/node_modules/**', '!**/vendor/**', '!src/index.ts'],
 };
