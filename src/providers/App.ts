@@ -4,15 +4,12 @@ import { ErrorHandlers } from './ErrorHandlers';
 import { HttpServer } from './HttpServer';
 import { Middlewares } from './Middlewares';
 import { Routes } from './Routes';
+import { HttpConfig } from '../configurations/Http';
 
 export class App {
   public httpServer: HttpServer;
 
   constructor() {
-    this.httpServer = new HttpServer();
-    this.httpServer.mountMiddlewares(Middlewares);
-    this.httpServer.mountRoutes(Routes);
-    this.httpServer.mountMiddlewares([Api404Handler]);
-    this.httpServer.mountErrorHandlers(ErrorHandlers);
+    this.httpServer = new HttpServer(Middlewares, [Api404Handler], Routes, ErrorHandlers, HttpConfig.PORT);
   }
 }
