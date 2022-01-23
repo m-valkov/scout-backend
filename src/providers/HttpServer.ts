@@ -1,27 +1,29 @@
 import express, { Application, ErrorRequestHandler, Router } from 'express';
-import { HttpConfig } from '../configurations/Http';
+import { Server } from 'http';
 import { Middleware } from '../interfaces/express';
+import { DebugLogger } from '../loggers/vendor/DebugLogger';
 
 export class HttpServer {
-  public transport: Application;
+  private _transport: Application;
+  public server: Server;
 
-  constructor() {
-    this.transport = express();
-  }
+  constructor(beforeEachMiddlewares: Middleware[], afterEachMiddlewares: Middleware[], routes: Router, errorHandlers: ErrorRequestHandler[], port: number) {
+    this._transport = express();
+    DebugLogger.debug('HttpServer created');
 
-  public mountRoutes(routers: Router): void {
-    this.transport.use(routers);
-  }
+    this._transport.use(beforeEachMiddlewares);
+    DebugLogger.debug('Before each requests middlewares mounted');
 
-  public mountMiddlewares(middlewares: Middleware[]): void {
-    this.transport.use(middlewares);
-  }
+    this._transport.use(routes);
+    DebugLogger.debug('Router mounted');
 
-  public mountErrorHandlers(errorHandlers: ErrorRequestHandler[]): void {
-    this.transport.use(errorHandlers);
-  }
+    this._transport.use(afterEachMiddlewares);
+    DebugLogger.debug('After each requests middlewares mounted');
 
-  public listen(): void {
-    this.transport.listen(HttpConfig.PORT);
+    this._transport.use(errorHandlers);
+    DebugLogger.debug('Error handlers mounted');
+
+    this.server = this._transport.listen(port);
+    DebugLogger.debug(`Server listen on ${port} port`);
   }
 }
