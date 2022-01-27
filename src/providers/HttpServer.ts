@@ -1,6 +1,6 @@
 import express, { Application, ErrorRequestHandler, Router } from 'express';
 import { Server } from 'http';
-import { Middleware } from '../interfaces/express';
+import { Middleware } from '../types/express';
 import { DebugLogger } from '../loggers/vendor/DebugLogger';
 
 export class HttpServer {

@@ -1,6 +1,6 @@
 import { AccessLogger } from '../../loggers/vendor/AccessLogger';
 import morgan from 'morgan';
-import { Middleware } from '../../interfaces/express';
+import { Middleware } from '../../types/express';
 import { DebugLogger } from '../../loggers/vendor/DebugLogger';
 
 class MorganStream {

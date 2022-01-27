@@ -1,6 +1,6 @@
 import rateLimit from 'express-rate-limit';
 import { HttpConfig } from '../../configurations/Http';
-import { Middleware } from '../../interfaces/express';
+import { Middleware } from '../../types/express';
 
 export const RateLimit: Middleware = rateLimit({
   windowMs: HttpConfig.RATE_LIMIT_WINDOWS_MS,

@@ -1,4 +1,4 @@
-import { Middleware } from '../../interfaces/express';
+import { Middleware } from '../../types/express';
 import compression, { CompressionOptions } from 'compression';
 import { HttpConfig } from '../../configurations/Http';
 

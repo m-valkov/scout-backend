@@ -1,22 +1,30 @@
-import { createLogger, LoggerOptions, Logger } from 'winston';
+import { Request } from 'express';
+import { Telegraf } from 'telegraf';
 import { LoggerConfig } from '../../configurations/Logger';
-import telegramTransport from 'winston-telegram';
+import { makeMessageFromErrorAndRequest } from '../../lib/utils';
+import { ILogger } from '../../types/logger';
+import { DebugLogger } from './DebugLogger';
 
-const errorLoggerOptions: LoggerOptions = {
-  transports: [
-    new telegramTransport({
-      token: LoggerConfig.TELEGRAM_BOT_TOKEN,
-      chatId: LoggerConfig.TELEGRAM_CHAT_ID,
-      level: 'error',
-      unique: false,
-      parseMode: 'MarkdownV2',
-      formatMessage: options => {
-        let message = options.message;
-        message = `\`\`\`${message}\`\`\``;
-        return message;
-      },
-    }),
-  ],
-};
+class Logger implements ILogger {
+  private _telegraf: Telegraf;
+  private _token: string;
+  private _chatID: number;
 
-export const TelegramLogger: Logger = createLogger(errorLoggerOptions);
+  constructor(token: string, chatID: number) {
+    this._token = token;
+    this._chatID = chatID;
+    this._telegraf = new Telegraf(this._token);
+  }
+
+  private _prepareMessage(err: Error, req: Request): string {
+    const blockQuote = '```';
+    const message = makeMessageFromErrorAndRequest(err, req);
+    return blockQuote + message + blockQuote;
+  }
+  async log(err: Error, req: Request): Promise<void> {
+    DebugLogger.debug('Send error to telegram chanel');
+    const message = this._prepareMessage(err, req);
+    await this._telegraf.telegram.sendMessage(this._chatID, message, { parse_mode: 'MarkdownV2' });
+  }
+}
+export const TelegramLogger: ILogger = new Logger(LoggerConfig.TELEGRAM_BOT_TOKEN, LoggerConfig.TELEGRAM_CHAT_ID);
