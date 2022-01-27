@@ -1,4 +1,4 @@
-import { Middleware } from '../interfaces/express';
+import { Middleware } from '../types/express';
 import { Compression } from '../middlewares/vendor/Compression';
 import { CORS } from '../middlewares/vendor/Cors';
 import { Helmet } from '../middlewares/vendor/Helmet';

@@ -1,4 +1,4 @@
-import { Middleware } from '../../interfaces/express';
+import { Middleware } from '../../types/express';
 import expressBasicAuth, { BasicAuthMiddlewareOptions } from 'express-basic-auth';
 import { HttpConfig } from '../../configurations/Http';
 

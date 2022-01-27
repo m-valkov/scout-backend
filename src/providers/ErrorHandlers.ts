@@ -1,5 +1,6 @@
 import { ErrorRequestHandler } from 'express';
-import { ErrorsCatcher } from '../middlewares/ErrorsCatcher';
-import { ErrorClientSender } from '../middlewares/ErrorsClientSender';
+import { CriticalErrorHandler } from '../handlers/errors/CriticalErrorHandler';
+import { ErrorClientSender } from '../handlers/errors/ErrorsClientSender';
+import { SentryErrorHandler } from '../handlers/errors/SentryErrorHandler';
 
-export const ErrorHandlers: ErrorRequestHandler[] = [ErrorsCatcher, ErrorClientSender];
+export const ErrorHandlers: ErrorRequestHandler[] = [SentryErrorHandler, ErrorClientSender, CriticalErrorHandler];

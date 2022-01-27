@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { Api404Handler } from '../handlers/Api404Handler';
+import { Api404Handler } from '../handlers/errors/Api404Handler';
 import { ErrorHandlers } from './ErrorHandlers';
 import { HttpServer } from './HttpServer';
 import { Middlewares } from './Middlewares';

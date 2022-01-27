@@ -1,4 +1,4 @@
 import helmet from 'helmet';
-import { Middleware } from '../../interfaces/express';
+import { Middleware } from '../../types/express';
 
 export const Helmet: Middleware = helmet();
