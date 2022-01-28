@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { BaseError } from '../exceptions/BaseError';
 
-export const makeMessageFromErrorAndRequest = (err: Error | BaseError, req: Request): string => {
+export const makeMessageFromErrorAndRequest = (err: BaseError, req: Request): string => {
   const stack = err.stack;
   const url = req.url;
   const headers = JSON.stringify(req.headers, null, '\t');
