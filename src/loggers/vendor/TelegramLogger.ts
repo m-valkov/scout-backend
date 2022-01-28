@@ -2,7 +2,7 @@ import { Request } from 'express';
 import { Telegraf } from 'telegraf';
 import { LoggerConfig } from '../../configurations/Logger';
 import { BaseError } from '../../exceptions/BaseError';
-import { makeMessageFromErrorAndRequest } from '../../lib/utils';
+import { makeMessageFromErrorAndRequest } from '../../lib/Utils';
 import { ILogger } from '../../types/logger';
 import { DebugLogger } from './DebugLogger';
 
@@ -17,12 +17,12 @@ class Logger implements ILogger {
     this._telegraf = new Telegraf(this._token);
   }
 
-  private _prepareMessage(err: BaseError, req: Request): string {
+  private _prepareMessage(err: BaseError, req?: Request): string {
     const blockQuote = '```';
     const message = makeMessageFromErrorAndRequest(err, req);
     return blockQuote + message + blockQuote;
   }
-  async log(err: BaseError, req: Request): Promise<void> {
+  async log(err: BaseError, req?: Request): Promise<void> {
     DebugLogger.debug('Send error to telegram chanel');
     const message = this._prepareMessage(err, req);
     await this._telegraf.telegram.sendMessage(this._chatID, message, { parse_mode: 'MarkdownV2' });

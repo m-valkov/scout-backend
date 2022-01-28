@@ -1,5 +1,5 @@
 # Scout Backend
-![APM](https://img.shields.io/apm/l/vim-mode) ![Statements](https://img.shields.io/badge/statements-86.3%25-yellow.svg?style=flat) ![Branches](https://img.shields.io/badge/branches-81.35%25-yellow.svg?style=flat) ![Functions](https://img.shields.io/badge/functions-40%25-red.svg?style=flat) ![Lines](https://img.shields.io/badge/lines-85.81%25-yellow.svg?style=flat)
+![APM](https://img.shields.io/apm/l/vim-mode) ![Statements](https://img.shields.io/badge/statements-76.82%25-red.svg?style=flat) ![Branches](https://img.shields.io/badge/branches-80%25-yellow.svg?style=flat) ![Functions](https://img.shields.io/badge/functions-30.76%25-red.svg?style=flat) ![Lines](https://img.shields.io/badge/lines-76.58%25-red.svg?style=flat)
 ## .env
 ```ini
 #app
