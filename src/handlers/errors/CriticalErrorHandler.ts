@@ -6,10 +6,10 @@ import { TelegramLogger } from '../../loggers/vendor/TelegramLogger';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const CriticalErrorHandler: ErrorRequestHandler = (err: Error | BaseError, req: Request, _res: Response, _next: NextFunction): void => {
-  Promise.all([TelegramLogger.log(err, req), ErrorLogger.log(err, req)]).then(() => {
-    if (!(err instanceof BaseError)) {
-      DebugLogger.debug('Critical error. Emergency application shutdown');
-      process.exit(1);
-    }
-  });
+  TelegramLogger.log(err, req);
+  ErrorLogger.log(err, req);
+  if (!(err instanceof BaseError)) {
+    DebugLogger.debug('Critical error. Emergency application shutdown');
+    process.exit(1);
+  }
 };
