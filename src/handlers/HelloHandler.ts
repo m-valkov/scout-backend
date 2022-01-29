@@ -1,6 +1,13 @@
 import { RequestHandler, Request, Response } from 'express';
 import { HttpStatusCode } from '../configurations/HttpStatusCode';
+import { ResponseMessage } from '../types/responses';
 
 export const HelloHandler: RequestHandler = (req: Request, res: Response): void => {
-  res.status(HttpStatusCode.OK).json({ status: HttpStatusCode.OK, data: { message: 'Hello World' } });
+  const responseMessage: ResponseMessage = {
+    status: 'OK',
+    data: {
+      message: 'Hello World!',
+    },
+  };
+  res.status(HttpStatusCode.OK).json(responseMessage);
 };
