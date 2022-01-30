@@ -20,7 +20,7 @@ describe('Configuration', () => {
 
     expect(AppConfig.IS_PRODUCTION).toBe(false);
 
-    expect(HttpConfig.PORT).toBe(3000);
+    expect(HttpConfig.PORT).toBe(80);
     expect(HttpConfig.DOMAIN).toBe('localhost');
     expect(HttpConfig.COMPRESSION_LEVEL).toBe(0);
     expect(HttpConfig.MAX_REQUEST_BODY_SIZE).toBe('2mb');
@@ -41,7 +41,7 @@ describe('Configuration', () => {
     expect(SwaggerConfig.OPENAPI_VERSION).toBe('3.0.0');
     expect(SwaggerConfig.SWAGGER_TITLE).toBe('Api documentation');
     expect(SwaggerConfig.API_VERSION).toBe('1.0.0');
-    expect(SwaggerConfig.SERVER_URL).toBe('http://localhost:3000/api');
+    expect(SwaggerConfig.SERVER_URL).toBe('http://localhost:80/api');
     expect(SwaggerConfig.SERVER_DESCRIPTION).toBe('Dev server');
     expect(SwaggerConfig.DOCS_ENDPOINT).toBe('/docs');
   });
