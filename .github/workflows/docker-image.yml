@@ -23,4 +23,4 @@ jobs:
         docker build --target=production . --file Dockerfile --tag ghcr.io/MikhailValkov/scout-backend:production-$(date +%s)
         docker push ghcr.io/MikhailValkov/scout-backend:production-$(date +%s)
       env:
-        CR_PAT: ${{ secrets.ACTIONS }}
+        ACTIONS: ${{ secrets.ACTIONS }}
