@@ -37,7 +37,6 @@ jobs:
     needs: analyze
     name: NjsScan analize
     runs-on: ubuntu-latest
-    name: njsscan code scanning
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
