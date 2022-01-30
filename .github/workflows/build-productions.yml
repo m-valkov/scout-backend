@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build production image
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Building stage docker image
+    - name: Building production docker image
       run: |
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:production-${{github.sha}}
