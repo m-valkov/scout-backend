@@ -20,7 +20,7 @@ jobs:
         echo $ACTIONS | docker login ghcr.io -u m-valkov --password-stdin
         docker build --target=stage . --file Dockerfile --tag ghcr.io/m-valkov/scout-backend:stage
         docker push ghcr.io/m-valkov/scout-backend:stage
-        docker build --target=production . --file Dockerfile --tag ghcr.io/m-vallkov/scout-backend:prod
-        docker push ghcr.io/m-valkov/scout-backend:prod
+        docker build --target=production . --file Dockerfile --tag ghcr.io/m-valkov/scout-backend:productions
+        docker push ghcr.io/m-valkov/scout-backend:productions
       env:
         ACTIONS: ${{ secrets.ACTIONS }}
