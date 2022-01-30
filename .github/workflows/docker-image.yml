@@ -18,9 +18,9 @@ jobs:
     - name: Build the scout-backend Docker image
       run: |
         echo $ACTIONS | docker login ghcr.io -u m-valkov --password-stdin
-        docker build --target=stage . --file Dockerfile --tag ghcr.io/m-valkov/scout-backend:stage-$(date +%s)
-        docker push ghcr.io/m-valkov/scout-backend:stage-$(date +%s)
-        docker build --target=production . --file Dockerfile --tag ghcr.io/m-vallkov/scout-backend:production-$(date +%s)
-        docker push ghcr.io/m-valkov/scout-backend:production-$(date +%s)
+        docker build --target=stage . --file Dockerfile --tag ghcr.io/m-valkov/scout-backend:stage
+        docker push ghcr.io/m-valkov/scout-backend:stage
+        docker build --target=production . --file Dockerfile --tag ghcr.io/m-vallkov/scout-backend:production
+        docker push ghcr.io/m-valkov/scout-backend:production
       env:
         ACTIONS: ${{ secrets.ACTIONS }}
