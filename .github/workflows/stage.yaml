@@ -1,13 +1,10 @@
-name: "Checks and test"
+name: "Build stage"
 
 on:
   push:
-    branches:
-      - '**'
+    branches: [dev]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches:
-      - '**'
+    branches: [dev]
 
 jobs:
   analyze:
@@ -53,7 +50,7 @@ jobs:
       with:
         sarif_file: results.sarif
   
-  build:
+  tests:
     needs: njsscan
     runs-on: ubuntu-latest
     strategy:
@@ -69,3 +66,16 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+  stage:
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Building stage docker image
+      run: |
+        docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
+        docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:stage-${{github.sha}}
+        docker push ghcr.io/${{github.repository}}:stage-${{github.sha}}
