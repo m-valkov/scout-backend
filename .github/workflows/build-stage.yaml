@@ -1,10 +1,18 @@
-name: Docker Image CI
+name: Build stage docker image
 
+# on:
+#   push:
+#     branches:
+#       - '**'
+#   pull_request:
+#     branches:
+#       - '**'
 on:
-  push:
-    branches: [ dev ]
-  pull_request:
-    branches: [ dev ]
+  workflow_run:
+    workflows: [Node.js CI]
+    types:
+      - completed
+    branches: [dev]
 
 jobs:
 
@@ -15,8 +23,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Build the scout-backend Docker image
+    - name: Building stage docker image
       run: |
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
-        docker build --target=stage . --file Dockerfile --tag ghcr.io/m-valkov/scout-backend:stage
-        docker push ghcr.io/m-valkov/scout-backend:stage
+        docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:stage-${{github.sha}}
+        docker push ghcr.io/${{github.repository}}:stage-${{github.sha}}
