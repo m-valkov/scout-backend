@@ -10,7 +10,7 @@ name: Node.js CI
 #     branches: [ master, dev ]
 on:
   workflow_run:
-    workflows: ["CodeQL"]
+    workflows: ["njsscan sarif"]
     types:
       - completed
     branches:
