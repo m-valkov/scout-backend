@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
   pull_request:
-    branches: [ master ]
+    branches: [ dev ]
 
 jobs:
 
@@ -17,10 +17,6 @@ jobs:
     
     - name: Build the scout-backend Docker image
       run: |
-        echo $ACTIONS | docker login ghcr.io -u m-valkov --password-stdin
+        docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=stage . --file Dockerfile --tag ghcr.io/m-valkov/scout-backend:stage
         docker push ghcr.io/m-valkov/scout-backend:stage
-        docker build --target=production . --file Dockerfile --tag ghcr.io/m-valkov/scout-backend:productions
-        docker push ghcr.io/m-valkov/scout-backend:productions
-      env:
-        ACTIONS: ${{ secrets.ACTIONS }}
