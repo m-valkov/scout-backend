@@ -8,16 +8,23 @@
 
 name: njsscan sarif
 
+# on:
+#   push:
+#     branches:
+#       - '**'
+#   pull_request:
+#     # The branches below must be a subset of the branches above
+#     branches:
+#       - '**'
+#   schedule:
+#     - cron: '42 11 * * 1'
 on:
-  push:
+  workflow_run:
+    workflows: ["CodeQL"]
+    types:
+      - completed
     branches:
       - '**'
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches:
-      - '**'
-  schedule:
-    - cron: '42 11 * * 1'
 
 jobs:
   njsscan:
