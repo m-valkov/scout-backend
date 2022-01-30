@@ -14,5 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build the stage Docker image
+      run: docker build --target=stage . --file Dockerfile --tag scout-backend-stage:$(date +%s)
+      run: docker build --target=production . --file Dockerfile --tag scout-backend-stage:$(date +%s)
