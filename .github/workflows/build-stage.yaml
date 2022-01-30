@@ -1,12 +1,18 @@
 name: Build stage docker image
 
+# on:
+#   push:
+#     branches:
+#       - '**'
+#   pull_request:
+#     branches:
+#       - '**'
 on:
-  push:
-    branches:
-      - '**'
-  pull_request:
-    branches:
-      - '**'
+  workflow_run:
+    workflows: [Node.js CI]
+    types:
+      - completed
+    branches: [dev]
 
 jobs:
 

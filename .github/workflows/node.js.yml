@@ -3,11 +3,18 @@
 
 name: Node.js CI
 
+# on:
+#   push:
+#     branches: [ master, dev ]
+#   pull_request:
+#     branches: [ master, dev ]
 on:
-  push:
-    branches: [ master, dev ]
-  pull_request:
-    branches: [ master, dev ]
+  workflow_run:
+    workflows: [njsscan sarif, CodeQL]
+    types:
+      - completed
+    branches:
+      - '**'
 
 jobs:
   build:
