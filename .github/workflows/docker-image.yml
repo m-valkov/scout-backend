@@ -14,7 +14,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the stage Docker image
-      run: docker build --target=stage . --file Dockerfile --tag scout-backend-stage:$(date +%s)
-    - name: Build the production Docker image
-      run: docker build --target=production . --file Dockerfile --tag scout-backend-stage:$(date +%s)
+    
+    - name: Build the scout-backend Docker image
+      run: |
+        echo $ACTIONS | docker login ghcr.io -u MikhailValkov --password-stdin
+        docker build --target=stage . --file Dockerfile --tag ghcr.io/MikhailValkov/scout-backend:stage-$(date +%s)
+        docker push ghcr.io/MikhailValkov/scout-backend:stage-$(date +%s)
+        docker build --target=production . --file Dockerfile --tag ghcr.io/MikhailValkov/scout-backend:production-$(date +%s)
+        docker push ghcr.io/MikhailValkov/scout-backend:production-$(date +%s)
+      env:
+        CR_PAT: ${{ secrets.ACTIONS }}
