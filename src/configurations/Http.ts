@@ -2,7 +2,7 @@ export class HttpConfig {
   /**
    * Which port to use for the server
    */
-  static readonly PORT: number = Number(process.env.PORT) || 3000;
+  static readonly PORT: number = Number(process.env.PORT) || 80;
 
   static readonly DOMAIN: string = process.env.DOMAIN || 'localhost';
 
