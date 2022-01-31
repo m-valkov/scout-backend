@@ -1,10 +1,8 @@
 name: "Build prod"
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+  tags:
+  - *prod
 
 jobs:
   analyze:
