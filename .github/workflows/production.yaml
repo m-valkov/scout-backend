@@ -1,8 +1,11 @@
 name: "Build prod"
 
 on:
-  tags:
-    - '**prod'
+  push:
+    branches:
+      - master
+    tags:
+      - '**.prod'
 
 jobs:
   analyze:

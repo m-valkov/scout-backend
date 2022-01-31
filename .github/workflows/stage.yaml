@@ -1,8 +1,11 @@
 name: "Build stage"
 
 on:
-  tags:
-    - '**stage'
+  push:
+    branches:
+      - master
+    tags:
+      - '**.stage'
 
 jobs:
   analyze:
