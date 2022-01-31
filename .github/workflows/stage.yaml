@@ -3,7 +3,7 @@ name: "Build stage"
 on:
   create:
     tags:
-      - 'v*.*.*-stage'
+      - '**stage'
 
 jobs:
   analyze:
