@@ -81,3 +81,14 @@ jobs:
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:stage-${{github.sha}}
         docker push ghcr.io/${{github.repository}}:stage-${{github.sha}}
+  deploy:
+    needs: stage
+    name: Deploy stage
+    uses: nerd4ever/ssh-action@master
+    with:
+      command: |
+        cd /tmp
+        ls -a
+      host: ${{ secrets.DEPLOY_SSH_IP }}
+      user: ${{ secrets.DEPLOY_SSH_USER}}
+      key: ${{ secrets.DEPLOY_SSH_KEY}}
