@@ -7,51 +7,51 @@ on:
     branches: [dev]
 
 jobs:
-  analyze:
-    name: CodeQL analize
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
+  # analyze:
+  #   name: CodeQL analize
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     actions: read
+  #     contents: read
+  #     security-events: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'javascript' ]
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       language: [ 'javascript' ]
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+  #   steps:
+  #   - name: Checkout repository
+  #     uses: actions/checkout@v2
 
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: ${{ matrix.language }}
+  #   # Initializes the CodeQL tools for scanning.
+  #   - name: Initialize CodeQL
+  #     uses: github/codeql-action/init@v1
+  #     with:
+  #       languages: ${{ matrix.language }}
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+  #   - name: Perform CodeQL Analysis
+  #     uses: github/codeql-action/analyze@v1
 
-  njsscan:
-    needs: analyze
-    name: NjsScan analize
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
-    - name: nodejsscan scan
-      id: njsscan
-      uses: ajinabraham/njsscan-action@7237412fdd36af517e2745077cedbf9d6900d711
-      with:
-        args: '. --sarif --output results.sarif || true'
-    - name: Upload njsscan report
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: results.sarif
+  # njsscan:
+  #   needs: analyze
+  #   name: NjsScan analize
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout the code
+  #     uses: actions/checkout@v2
+  #   - name: nodejsscan scan
+  #     id: njsscan
+  #     uses: ajinabraham/njsscan-action@7237412fdd36af517e2745077cedbf9d6900d711
+  #     with:
+  #       args: '. --sarif --output results.sarif || true'
+  #   - name: Upload njsscan report
+  #     uses: github/codeql-action/upload-sarif@v1
+  #     with:
+  #       sarif_file: results.sarif
   
   tests:
-    needs: njsscan
+    # needs: njsscan
     name: Unit tests
     runs-on: ubuntu-latest
     strategy:
@@ -81,3 +81,21 @@ jobs:
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:stage-${{github.sha}}
         docker push ghcr.io/${{github.repository}}:stage-${{github.sha}}
+        
+  deploy:
+    needs: stage
+    name: Deploy stage
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_SSH_IP }}
+        username: ${{ secrets.DEPLOY_SSH_USER }}
+        key: ${{ secrets.DEPLOY_SSH_KEY }}
+        port: ${{ secrets.DEPLOY_SSH_PORT }}
+        script: |
+          docker pull ghcr.io/${{github.repository}}:stage-${{github.sha}}
+          docker stop ${{secrets.STAGE_CONTAINER_NAME}}
+          docker rm ${{secrets.STAGE_CONTAINER_NAME}}
+          docker run --name=${{secrets.STAGE_CONTAINER_NAME}} -p 3333:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}} -e SENTRY_DSN=${{secrets.SENTRY_DSN}} -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}} -d ghcr.io/${{github.repository}}:stage-${{github.sha}}
