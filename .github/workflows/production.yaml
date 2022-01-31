@@ -1,7 +1,7 @@
 name: "Build prod"
 
 on:
-  push:
+  create:
     tags:
       - '**.prod'
 
@@ -49,26 +49,8 @@ jobs:
       with:
         sarif_file: results.sarif
   
-  tests:
-    needs: njsscan
-    name: Unit testing
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x, 17.x]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
-
-  stage:
-    needs: tests
+  prod:
+    needs: analyze
     name: Building production image
     runs-on: ubuntu-latest
 
@@ -78,5 +60,22 @@ jobs:
     - name: Building stage docker image
       run: |
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
-        docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:prod-${{github.sha}}
-        docker push ghcr.io/${{github.repository}}:prod-${{github.sha}}
+        docker build --target=prod . --file Dockerfile --tag ghcr.io/${{github.repository}}::${{github.ref_name}}
+        docker push ghcr.io/${{github.repository}}::${{github.ref_name}}
+  deploy:
+    needs: prod
+    name: Deploy prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_SSH_IP }}
+        username: ${{ secrets.DEPLOY_SSH_USER }}
+        key: ${{ secrets.DEPLOY_SSH_KEY }}
+        port: ${{ secrets.DEPLOY_SSH_PORT }}
+        script: |
+          docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}
+          docker stop ${{secrets.PROD_CONTAINER_NAME}}
+          docker rm ${{secrets.PROD_CONTAINER_NAME}}
+          docker run --name=${{secrets.PROD_CONTAINER_NAME}} -p 4444:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}} -e SENTRY_DSN=${{secrets.SENTRY_DSN}} -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}} -d ghcr.io/${{github.repository}}::${{github.ref_name}}
