@@ -94,5 +94,7 @@ jobs:
         key: ${{ secrets.DEPLOY_SSH_KEY }}
         port: ${{ secrets.DEPLOY_SSH_PORT }}
         script: |
-          uname -a
-          touch /root/zdes_bil_deploy_stage
+          docker pull ghcr.io/${{github.repository}}:stage-${{github.sha}}
+          docker stop ${{github.repository}}:stage
+          docker rm ${{github.repository}}:stage
+          docker run --name=${{github.repository}}:stage --restart=always -e DOMAIN=${{secrets.DOMAIN}} -e SENTRY_DSN=${{secrets.SENTRY_DSN}} -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}} -d ghcr.io/${{github.repository}}:stage-${{github.sha}}
