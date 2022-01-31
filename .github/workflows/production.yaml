@@ -3,7 +3,7 @@ name: "Build prod"
 on:
   create:
     tags:
-      - '**.prod'
+      - 'v*.*.*-prod'
 
 jobs:
   analyze:
