@@ -84,11 +84,12 @@ jobs:
   deploy:
     needs: stage
     name: Deploy stage
-    uses: nerd4ever/ssh-action@master
-    with:
-      command: |
-        cd /tmp
-        ls -a
-      host: ${{ secrets.DEPLOY_SSH_IP }}
-      user: ${{ secrets.DEPLOY_SSH_USER}}
-      key: ${{ secrets.DEPLOY_SSH_KEY}}
+    steps:
+      uses: nerd4ever/ssh-action@master
+      with:
+        command: |
+          cd /tmp
+          ls -a
+        host: ${{ secrets.DEPLOY_SSH_IP }}
+        user: ${{ secrets.DEPLOY_SSH_USER}}
+        key: ${{ secrets.DEPLOY_SSH_KEY}}
