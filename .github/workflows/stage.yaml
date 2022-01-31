@@ -2,7 +2,7 @@ name: "Build stage"
 
 on:
   tags:
-  - *stage
+    - *stage
 
 jobs:
   analyze:

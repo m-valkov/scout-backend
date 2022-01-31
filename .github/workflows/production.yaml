@@ -2,7 +2,7 @@ name: "Build prod"
 
 on:
   tags:
-  - *prod
+    - *prod
 
 jobs:
   analyze:
