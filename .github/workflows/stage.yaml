@@ -85,7 +85,7 @@ jobs:
     needs: stage
     name: Deploy stage
     steps:
-      uses: nerd4ever/ssh-action@master
+    - uses: nerd4ever/ssh-action@master
       with:
         command: |
           cd /tmp
