@@ -84,6 +84,7 @@ jobs:
   deploy:
     needs: stage
     name: Deploy stage
+    runs-on: ubuntu-latest
     steps:
     - uses: nerd4ever/ssh-action@master
       with:
