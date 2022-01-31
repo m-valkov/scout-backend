@@ -2,8 +2,6 @@ name: "Build prod"
 
 on:
   push:
-    branches:
-      - master
     tags:
       - '**.prod'
 
