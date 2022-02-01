@@ -61,7 +61,7 @@ jobs:
     - name: Building stage docker image
       run: |
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
-        docker build --target=prod . --file Dockerfile --tag ghcr.io/${{github.repository}}:${{github.ref_name}}
+        docker build --target=prod . --file Dockerfile --tag ghcr.io/${{github.repository}}:${{github.ref_name}}-prod
         docker push ghcr.io/${{github.repository}}:${{github.ref_name}}-prod
 
   predeploy:
