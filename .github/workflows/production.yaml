@@ -6,6 +6,7 @@ on:
 
 jobs:
   analyze:
+    if: "!github.event.release.prerelease"
     name: CodeQl analize
     runs-on: ubuntu-latest
     permissions:
@@ -31,25 +32,26 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
 
-  njsscan:
+  tests:
     needs: analyze
-    name: NjsScan analize
+    name: Unit tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 17.x]
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
-    - name: nodejsscan scan
-      id: njsscan
-      uses: ajinabraham/njsscan-action@7237412fdd36af517e2745077cedbf9d6900d711
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
       with:
-        args: '. --sarif --output results.sarif || true'
-    - name: Upload njsscan report
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: results.sarif
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
   
   prod:
-    needs: analyze
+    needs: tests
     name: Building production image
     runs-on: ubuntu-latest
 
@@ -61,6 +63,7 @@ jobs:
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=prod . --file Dockerfile --tag ghcr.io/${{github.repository}}::${{github.ref_name}}
         docker push ghcr.io/${{github.repository}}::${{github.ref_name}}
+
   deploy:
     needs: prod
     name: Deploy prod
@@ -77,4 +80,4 @@ jobs:
           docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}
           docker stop ${{secrets.PROD_CONTAINER_NAME}}
           docker rm ${{secrets.PROD_CONTAINER_NAME}}
-          docker run --name=${{secrets.PROD_CONTAINER_NAME}} -p 4444:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}} -e SENTRY_DSN=${{secrets.SENTRY_DSN}} -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}} -d ghcr.io/${{github.repository}}::${{github.ref_name}}
+          docker run --name=${{secrets.PROD_CONTAINER_NAME}} -p 4444:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}} -e SENTRY_DSN=${{secrets.SENTRY_DSN}} -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}} -d ghcr.io/${{github.repository}}:${{github.ref_name}}
