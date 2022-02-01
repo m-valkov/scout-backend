@@ -1,4 +1,4 @@
-name: "Build stage"
+name: "COdeQL and unit tests"
 
 on:
   push:
