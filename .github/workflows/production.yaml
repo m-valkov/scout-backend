@@ -1,5 +1,8 @@
 name: "Build prod"
 
+# first deploy run with error
+# container not found
+# all subsequent builds should be stable
 on:
   release:
     types: [published]
@@ -8,7 +11,7 @@ jobs:
   build:
     name: Building production image
     runs-on: ubuntu-latest
-
+    if: "!github.event.release.prerelease"
     steps:
     - uses: actions/checkout@v2
     

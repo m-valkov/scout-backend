@@ -11,6 +11,7 @@ jobs:
   build:
     name: Build stage image
     runs-on: ubuntu-latest
+    if: "github.event.release.prerelease"
 
     steps:
     - uses: actions/checkout@v2
