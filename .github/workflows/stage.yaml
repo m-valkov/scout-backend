@@ -5,53 +5,7 @@ on:
     types: [published]
 
 jobs:
-  analyze:
-    if: "github.event.release.prerelease"
-    name: CodeQL analize
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'javascript' ]
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: ${{ matrix.language }}
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
-  
-  tests:
-    needs: analyze
-    name: Unit tests
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x, 17.x]
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
-
-  stage:
-    needs: tests
+  build:
     name: Build stage image
     runs-on: ubuntu-latest
 
@@ -65,7 +19,7 @@ jobs:
         docker push ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
         
   predeploy:
-    needs: stage
+    needs: build
     name: Update images and stop current container
     runs-on: ubuntu-latest
     steps:
