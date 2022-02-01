@@ -60,8 +60,8 @@ jobs:
     - name: Building stage docker image
       run: |
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
-        docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:${{github.ref_name}}
-        docker push ghcr.io/${{github.repository}}:${{github.ref_name}}
+        docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
+        docker push ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
         
   deploy:
     needs: stage
@@ -76,7 +76,12 @@ jobs:
         key: ${{ secrets.DEPLOY_SSH_KEY }}
         port: ${{ secrets.DEPLOY_SSH_PORT }}
         script: |
-          docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}
-          docker stop ${{secrets.STAGE_CONTAINER_NAME}}
-          docker rm ${{secrets.STAGE_CONTAINER_NAME}}
-          docker run --name=${{secrets.STAGE_CONTAINER_NAME}} -p 3333:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}} -e SENTRY_DSN=${{secrets.SENTRY_DSN}} -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}} -d ghcr.io/${{github.repository}}:${{github.ref_name}}
+          docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
+          docker stop ${{secrets.STAGE_CONTAINER_NAME}}-stage
+          docker rm ${{secrets.STAGE_CONTAINER_NAME}}-stage
+        script: >
+          docker run --name=${{secrets.STAGE_CONTAINER_NAME}}
+          -p 3333:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}}
+          -e SENTRY_DSN=${{secrets.SENTRY_DSN}}
+          -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}}
+          -d ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
