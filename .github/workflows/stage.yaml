@@ -38,6 +38,7 @@ jobs:
   deploy:
     needs: predeploy
     name: Deploy stage
+    if: always()
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
