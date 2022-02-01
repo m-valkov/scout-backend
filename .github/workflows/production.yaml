@@ -1,9 +1,8 @@
 name: "Build prod"
 
 on:
-  create:
-    tags:
-      - 'v*.*.*-prod'
+  release:
+    types: [published]
 
 jobs:
   analyze:

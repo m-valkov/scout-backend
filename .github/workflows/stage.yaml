@@ -1,9 +1,7 @@
 name: "Build stage"
 
 on:
-  create:
-    tags:
-      - '**stage'
+  create
 
 jobs:
   analyze:
