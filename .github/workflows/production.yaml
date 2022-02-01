@@ -62,8 +62,8 @@ jobs:
       run: |
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=prod . --file Dockerfile --tag ghcr.io/${{github.repository}}:${{github.ref_name}}
-        docker push ghcr.io/${{github.repository}}:${{github.ref_name}}
-        
+        docker push ghcr.io/${{github.repository}}:${{github.ref_name}}-prod
+
   predeploy:
     needs: prod
     name: Update images and stop current container
