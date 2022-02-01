@@ -63,9 +63,9 @@ jobs:
         docker build --target=stage . --file Dockerfile --tag ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
         docker push ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
         
-  deploy:
+  predeploy:
     needs: stage
-    name: Deploy stage
+    name: Update images and stop current container
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
@@ -79,6 +79,24 @@ jobs:
           docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
           docker stop ${{secrets.STAGE_CONTAINER_NAME}}
           docker rm ${{secrets.STAGE_CONTAINER_NAME}}
+        script: >
+          docker run --name=${{secrets.STAGE_CONTAINER_NAME}}
+          -p 3333:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}}
+          -e SENTRY_DSN=${{secrets.SENTRY_DSN}}
+          -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}}
+          -d ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
+  deploy:
+    needs: predeploy
+    name: Deploy stage
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_SSH_IP }}
+        username: ${{ secrets.DEPLOY_SSH_USER }}
+        key: ${{ secrets.DEPLOY_SSH_KEY }}
+        port: ${{ secrets.DEPLOY_SSH_PORT }}
         script: >
           docker run --name=${{secrets.STAGE_CONTAINER_NAME}}
           -p 3333:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}}
