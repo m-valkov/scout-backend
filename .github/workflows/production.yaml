@@ -6,6 +6,7 @@ on:
 
 jobs:
   analyze:
+    if: "!github.event.release.prerelease"
     name: CodeQl analize
     runs-on: ubuntu-latest
     permissions:
@@ -62,7 +63,7 @@ jobs:
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=prod . --file Dockerfile --tag ghcr.io/${{github.repository}}::${{github.ref_name}}
         docker push ghcr.io/${{github.repository}}::${{github.ref_name}}
-        
+
   deploy:
     needs: prod
     name: Deploy prod

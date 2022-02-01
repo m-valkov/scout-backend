@@ -1,7 +1,8 @@
 name: "Build stage"
 
 on:
-  create
+  release:
+    types: [published]
 
 jobs:
   analyze:
