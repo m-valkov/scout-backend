@@ -1,5 +1,8 @@
 name: "Build stage"
 
+# first deploy run with error
+# container not found
+# all subsequent builds should be stable
 on:
   release:
     types: [published]
@@ -21,6 +24,7 @@ jobs:
   predeploy:
     needs: build
     name: Update images and stop current container
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
@@ -38,7 +42,6 @@ jobs:
   deploy:
     needs: predeploy
     name: Deploy stage
-    if: always()
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password

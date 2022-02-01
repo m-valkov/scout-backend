@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-    needs: tests
     name: Building production image
     runs-on: ubuntu-latest
 
@@ -22,6 +21,7 @@ jobs:
   predeploy:
     needs: build
     name: Update images and stop current container
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
