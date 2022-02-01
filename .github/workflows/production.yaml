@@ -63,6 +63,23 @@ jobs:
         docker login ghcr.io -u ${{github.repository_owner}} -p ${{ secrets.CR }}
         docker build --target=prod . --file Dockerfile --tag ghcr.io/${{github.repository}}:${{github.ref_name}}
         docker push ghcr.io/${{github.repository}}:${{github.ref_name}}
+        
+  predeploy:
+    needs: prod
+    name: Update images and stop current container
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_SSH_IP }}
+        username: ${{ secrets.DEPLOY_SSH_USER }}
+        key: ${{ secrets.DEPLOY_SSH_KEY }}
+        port: ${{ secrets.DEPLOY_SSH_PORT }}
+        script: |
+          docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}-prod
+          docker stop ${{secrets.PROD_CONTAINER_NAME}}
+          docker rm ${{secrets.PROD_CONTAINER_NAME}}
 
   deploy:
     needs: prod
@@ -76,8 +93,11 @@ jobs:
         username: ${{ secrets.DEPLOY_SSH_USER }}
         key: ${{ secrets.DEPLOY_SSH_KEY }}
         port: ${{ secrets.DEPLOY_SSH_PORT }}
-        script: |
-          docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}
-          docker stop ${{secrets.PROD_CONTAINER_NAME}}
-          docker rm ${{secrets.PROD_CONTAINER_NAME}}
-          docker run --name=${{secrets.PROD_CONTAINER_NAME}} -p 4444:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}} -e SENTRY_DSN=${{secrets.SENTRY_DSN}} -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}} -d ghcr.io/${{github.repository}}:${{github.ref_name}}
+        script: >
+          docker run --name=${{secrets.PROD_CONTAINER_NAME}}
+          -p 4444:80 --restart=always
+          -e DOMAIN=${{secrets.DOMAIN}}
+          -e SENTRY_DSN=${{secrets.SENTRY_DSN}}
+          -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}}
+          -v ~/logs/scout-prod:/usr/src/app/logs
+          -d ghcr.io/${{github.repository}}:${{github.ref_name}}-prod

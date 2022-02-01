@@ -79,6 +79,7 @@ jobs:
           docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
           docker stop ${{secrets.STAGE_CONTAINER_NAME}}
           docker rm ${{secrets.STAGE_CONTAINER_NAME}}
+
   deploy:
     needs: predeploy
     name: Deploy stage
@@ -93,7 +94,9 @@ jobs:
         port: ${{ secrets.DEPLOY_SSH_PORT }}
         script: >
           docker run --name=${{secrets.STAGE_CONTAINER_NAME}}
-          -p 3333:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}}
+          -p 3333:80 --restart=always
+          -e DOMAIN=${{secrets.DOMAIN}}
           -e SENTRY_DSN=${{secrets.SENTRY_DSN}}
           -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}}
+          -v ~/logs/scout-stage:/usr/src/app/logs
           -d ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
