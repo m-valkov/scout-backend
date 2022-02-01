@@ -82,7 +82,7 @@ jobs:
           docker rm ${{secrets.PROD_CONTAINER_NAME}}
 
   deploy:
-    needs: prod
+    needs: predeploy
     name: Deploy prod
     runs-on: ubuntu-latest
     steps:
