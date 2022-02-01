@@ -77,8 +77,8 @@ jobs:
         port: ${{ secrets.DEPLOY_SSH_PORT }}
         script: |
           docker pull ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
-          docker stop ${{secrets.STAGE_CONTAINER_NAME}}-stage
-          docker rm ${{secrets.STAGE_CONTAINER_NAME}}-stage
+          docker stop ${{secrets.STAGE_CONTAINER_NAME}}
+          docker rm ${{secrets.STAGE_CONTAINER_NAME}}
         script: >
           docker run --name=${{secrets.STAGE_CONTAINER_NAME}}
           -p 3333:80 --restart=always -e DOMAIN=${{secrets.DOMAIN}}
