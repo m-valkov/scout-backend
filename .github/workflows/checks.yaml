@@ -8,7 +8,6 @@ on:
 
 jobs:
   analyze:
-    if: "github.event.release.prerelease"
     name: CodeQL analize
     runs-on: ubuntu-latest
     permissions:
