@@ -6,5 +6,8 @@
   },
   "editor.tabSize": 2,
   "typescript.referencesCodeLens.enabled": true,
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "inline-parameters.hideRedundantAnnotations": false,
+  "inline-parameters.fontWeight": "300",
+  "inline-parameters.fontSize": "0.65em"
 }
