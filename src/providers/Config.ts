@@ -4,6 +4,7 @@ import { ApiConfig } from '../configurations/Api';
 import { HttpConfig } from '../configurations/Http';
 import { LoggerConfig } from '../configurations/Logger';
 import { SwaggerConfig } from '../configurations/Swagger';
+
 export class Config implements IConfig {
   public static _instance: Config | undefined;
   public AppConfig!: IAppConfig;
