@@ -1,9 +1,11 @@
 import cors, { CorsOptions } from 'cors';
-import { HttpConfig } from '../../configurations/Http';
+import { Config } from '../../providers/Config';
 import { Middleware } from '../../types/express';
 
+const config = new Config();
+
 const corsOptions: CorsOptions = {
-  origin: HttpConfig.DOMAIN,
+  origin: config.HttpConfig.DOMAIN,
 };
 
 export const CORS: Middleware = cors(corsOptions);

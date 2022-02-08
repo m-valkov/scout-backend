@@ -1,13 +1,14 @@
 import { Request } from 'express';
 
 import * as winston from 'winston';
-import { LoggerConfig } from '../../configurations/Logger';
 import { BaseError } from '../../exceptions/BaseError';
 import { makeMessageFromErrorAndRequest } from '../../lib/Utils';
+import { Config } from '../../providers/Config';
 import { ILogger } from '../../types/logger';
 import { DebugLogger } from './DebugLogger';
 
 const { combine, printf, timestamp } = winston.format;
+const config = new Config();
 
 const errorLoggerOptions: winston.LoggerOptions = {
   format: combine(
@@ -18,8 +19,8 @@ const errorLoggerOptions: winston.LoggerOptions = {
     new winston.transports.File({
       level: 'error',
       filename: './logs/error.log',
-      maxsize: LoggerConfig.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES,
-      maxFiles: LoggerConfig.ERROR_LOG_MAX_FILES,
+      maxsize: config.LoggerConfig.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES,
+      maxFiles: config.LoggerConfig.ERROR_LOG_MAX_FILES,
     }),
   ],
 };

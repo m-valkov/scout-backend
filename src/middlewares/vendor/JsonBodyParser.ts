@@ -1,7 +1,8 @@
 import { json } from 'express';
-import { HttpConfig } from '../../configurations/Http';
+import { Config } from '../../providers/Config';
 import { Middleware } from '../../types/express';
 
+const config = new Config();
 export const JsonBodyParser: Middleware = json({
-  limit: HttpConfig.MAX_REQUEST_BODY_SIZE,
+  limit: config.HttpConfig.MAX_REQUEST_BODY_SIZE,
 });

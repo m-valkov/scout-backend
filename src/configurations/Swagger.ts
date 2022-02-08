@@ -1,28 +1,36 @@
-import { APIConfig } from './Api';
-import { AppConfig } from './App';
-import { HttpConfig } from './Http';
+import { IConfig, ISwaggerConfig, ProcessEnv } from '../types/config';
 
-export class SwaggerConfig {
-  private static _defaultServerUrl = (): string => {
-    let url: string;
-
-    if (AppConfig.IS_PRODUCTION) {
-      url = `https://${HttpConfig.DOMAIN}${APIConfig.API_PREFIX}`;
-    } else {
-      url = `http://${HttpConfig.DOMAIN}:${HttpConfig.PORT}${APIConfig.API_PREFIX}`;
+export class SwaggerConfig implements ISwaggerConfig {
+  private static _instance: SwaggerConfig;
+  OPENAPI_VERSION!: string;
+  SWAGGER_TITLE!: string;
+  API_VERSION!: string;
+  SERVER_URL!: string;
+  SERVER_DESCRIPTION!: string;
+  DOCS_ENDPOINT!: string;
+  constructor(env: ProcessEnv, config: IConfig) {
+    if (SwaggerConfig._instance) {
+      return SwaggerConfig._instance;
     }
+    this._init(config, env);
+    SwaggerConfig._instance = this;
+  }
 
+  private _init(config: IConfig, env: ProcessEnv) {
+    this.OPENAPI_VERSION = env.OPENAPI_VERSION || '3.0.0';
+    this.SWAGGER_TITLE = env.SWAGGER_TITLE || 'Api documentation';
+    this.API_VERSION = env.API_VERSION || '1.0.0';
+    this.SERVER_URL = env.SERVER_URL || this._defaultServerUrl(config);
+    this.SERVER_DESCRIPTION = env.SERVER_DESCRIPTION || 'Dev server';
+    this.DOCS_ENDPOINT = env.DOCS_ENDPOINT || '/docs';
+  }
+  private _defaultServerUrl = (config: IConfig): string => {
+    let url: string;
+    if (config.AppConfig.IS_PRODUCTION) {
+      url = `https://${config.HttpConfig.DOMAIN}${config.ApiConfig.API_PREFIX}`;
+    } else {
+      url = `http://${config.HttpConfig.DOMAIN}:${config.HttpConfig.PORT}${config.ApiConfig.API_PREFIX}`;
+    }
     return url;
   };
-  static readonly OPENAPI_VERSION: string = process.env.OPENAPI_VERSION || '3.0.0';
-
-  static readonly SWAGGER_TITLE: string = process.env.SWAGGER_TITLE || 'Api documentation';
-
-  static readonly API_VERSION: string = process.env.API_VERSION || '1.0.0';
-
-  static readonly SERVER_URL: string = process.env.SERVER_URL || SwaggerConfig._defaultServerUrl();
-
-  static readonly SERVER_DESCRIPTION: string = process.env.SERVER_DESCRIPTION || 'Dev server';
-
-  static readonly DOCS_ENDPOINT: string = process.env.DOCS_ENDPOINT || '/docs';
 }

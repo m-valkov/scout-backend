@@ -1,13 +1,9 @@
-// load .env if not prod
-if (!(process.env.NODE_ENV === 'production')) {
-  import('dotenv').then(dotenv => {
-    dotenv.config();
-  });
-}
-
+import 'dotenv/config';
 import * as ProcessControl from './lib/ProcessControl';
 import { App } from './providers/App';
+import { Config } from './providers/Config';
 
-ProcessControl.init();
-
-new App();
+Config.parseDotEnvFile().then(() => {
+  new App();
+  ProcessControl.init();
+});

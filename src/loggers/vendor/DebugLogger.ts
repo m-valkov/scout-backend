@@ -1,7 +1,8 @@
 import { createLogger, transports, LoggerOptions, Logger, format } from 'winston';
-import { AppConfig } from '../../configurations/App';
+import { Config } from '../../providers/Config';
 
 const { combine, printf, timestamp, colorize } = format;
+const config = new Config();
 
 const accessLoggerOptions: LoggerOptions = {
   format: combine(
@@ -13,7 +14,7 @@ const accessLoggerOptions: LoggerOptions = {
     new transports.Console({
       level: 'debug',
       handleExceptions: true,
-      silent: AppConfig.IS_PRODUCTION,
+      silent: config.AppConfig.IS_PRODUCTION,
     }),
   ],
 };
