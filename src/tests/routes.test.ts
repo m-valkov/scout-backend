@@ -2,11 +2,13 @@ process.env.PORT = '5000';
 process.env.NODE_ENV = 'production';
 
 import { App } from '../providers/App';
-import { APIConfig } from '../configurations/Api';
 import request from 'supertest';
 import { ResponseMessage } from '../types/responses';
+import { Config } from '../providers/Config';
 
-const prefix = APIConfig.API_PREFIX;
+const config = new Config();
+
+const prefix = config.ApiConfig.API_PREFIX;
 
 const mApp = new App().httpServer.server;
 

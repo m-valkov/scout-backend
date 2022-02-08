@@ -1,7 +1,8 @@
 import { createLogger, transports, LoggerOptions, Logger, format } from 'winston';
-import { LoggerConfig } from '../../configurations/Logger';
+import { Config } from '../../providers/Config';
 
 const { combine, printf } = format;
+const config = new Config();
 
 const accessLoggerOptions: LoggerOptions = {
   format: combine(printf(info => `${info.level.toUpperCase()}: ${info.message}`)),
@@ -9,8 +10,8 @@ const accessLoggerOptions: LoggerOptions = {
     new transports.File({
       level: 'info',
       filename: './logs/access.log',
-      maxsize: LoggerConfig.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES,
-      maxFiles: LoggerConfig.ACCESS_LOG_MAX_FILES,
+      maxsize: config.LoggerConfig.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES,
+      maxFiles: config.LoggerConfig.ACCESS_LOG_MAX_FILES,
     }),
   ],
 };

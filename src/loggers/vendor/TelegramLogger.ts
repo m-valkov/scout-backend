@@ -1,10 +1,12 @@
 import { Request } from 'express';
 import { Telegraf } from 'telegraf';
-import { LoggerConfig } from '../../configurations/Logger';
 import { BaseError } from '../../exceptions/BaseError';
 import { makeMessageFromErrorAndRequest } from '../../lib/Utils';
+import { Config } from '../../providers/Config';
 import { ILogger } from '../../types/logger';
 import { DebugLogger } from './DebugLogger';
+
+const config = new Config();
 
 class Logger implements ILogger {
   private _telegraf: Telegraf;
@@ -28,4 +30,4 @@ class Logger implements ILogger {
     await this._telegraf.telegram.sendMessage(this._chatID, message, { parse_mode: 'MarkdownV2' });
   }
 }
-export const TelegramLogger: ILogger = new Logger(LoggerConfig.TELEGRAM_BOT_TOKEN, LoggerConfig.TELEGRAM_CHAT_ID);
+export const TelegramLogger: ILogger = new Logger(config.LoggerConfig.TELEGRAM_BOT_TOKEN, config.LoggerConfig.TELEGRAM_CHAT_ID);
