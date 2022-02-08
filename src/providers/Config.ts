@@ -27,17 +27,4 @@ export class Config implements IConfig {
 
     Config._instance = this;
   }
-
-  public static async parseDotEnvFile(path?: string): Promise<void> {
-    if (process.env.NODE_ENV !== 'production') {
-      await import('dotenv').then(dotenv => {
-        dotenv.config({ path });
-      });
-    }
-  }
-
-  // private loadEnv() {
-  //   this._env = process.env;
-  //   console.log(process.env);
-  // }
 }
