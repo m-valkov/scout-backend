@@ -1,7 +1,7 @@
-import { BaseError } from '../exceptions/BaseError';
-import { DebugLogger } from '../loggers/vendor/DebugLogger';
-import { ErrorLogger } from '../loggers/vendor/ErrorLogger';
-import { TelegramLogger } from '../loggers/vendor/TelegramLogger';
+import { BaseError } from '../../exceptions/BaseError';
+import { DebugLogger } from '../../loggers/vendor/DebugLogger';
+import { ErrorLogger } from '../../loggers/vendor/ErrorLogger';
+import { TelegramLogger } from '../../loggers/vendor/TelegramLogger';
 
 process.on('unhandledRejection', reason => {
   throw reason;
