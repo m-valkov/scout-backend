@@ -28,6 +28,8 @@ describe('Configuration', () => {
     process.env.SERVER_DESCRIPTION = 'Dev server 1';
     process.env.DOCS_ENDPOINT = '/docs1';
 
+    process.env.MONGO_DB_URI = 'uri';
+
     const c: Config = new Config();
 
     expect(c.ApiConfig.API_PREFIX).toBe('/api/v1');
@@ -58,5 +60,7 @@ describe('Configuration', () => {
     expect(c.SwaggerConfig.SERVER_URL).toBe('http://example.com:5000/api/v1');
     expect(c.SwaggerConfig.SERVER_DESCRIPTION).toBe('Dev server 1');
     expect(c.SwaggerConfig.DOCS_ENDPOINT).toBe('/docs1');
+
+    expect(c.DbConfig.MONGO_DB_URI).toBe('uri');
   });
 });

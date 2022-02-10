@@ -32,5 +32,7 @@ describe('Configuration', () => {
     expect(c.SwaggerConfig.SERVER_URL).toBe('http://localhost:80/api');
     expect(c.SwaggerConfig.SERVER_DESCRIPTION).toBe('Dev server');
     expect(c.SwaggerConfig.DOCS_ENDPOINT).toBe('/docs');
+
+    expect(c.DbConfig.MONGO_DB_URI).toBe('');
   });
 });

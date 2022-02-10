@@ -44,3 +44,7 @@ export interface ISwaggerConfig {
 export interface ProcessEnv {
   [key: string]: string | undefined;
 }
+
+export interface IDbConfig {
+  MONGO_DB_URI: string;
+}
