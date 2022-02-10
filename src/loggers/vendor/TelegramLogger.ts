@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { Telegraf } from 'telegraf';
 import { BaseError } from '../../exceptions/BaseError';
-import { makeMessageFromErrorAndRequest } from '../../lib/Utils';
+import { makeMessageFromErrorAndRequest } from '../../helpers/Utils';
 import { Config } from '../../providers/Config';
 import { ILogger } from '../../types/logger';
 import { DebugLogger } from './DebugLogger';

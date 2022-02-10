@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import * as ProcessControl from './lib/ProcessControl';
+import * as ProcessControl from './helpers/ProcessControl';
 import { App } from './providers/App';
 
 new App();
