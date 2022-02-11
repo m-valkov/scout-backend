@@ -4,6 +4,7 @@ export interface IConfig {
   HttpConfig: IHttpConfig;
   LoggerConfig: ILoggerConfig;
   SwaggerConfig: ISwaggerConfig;
+  DbConfig: IDbConfig;
 }
 
 export interface IApiConfig {
@@ -43,4 +44,8 @@ export interface ISwaggerConfig {
 
 export interface ProcessEnv {
   [key: string]: string | undefined;
+}
+
+export interface IDbConfig {
+  MONGO_DB_URI: string;
 }
