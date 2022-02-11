@@ -4,6 +4,7 @@ export interface IConfig {
   HttpConfig: IHttpConfig;
   LoggerConfig: ILoggerConfig;
   SwaggerConfig: ISwaggerConfig;
+  DbConfig: IDbConfig;
 }
 
 export interface IApiConfig {
