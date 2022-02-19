@@ -7,6 +7,7 @@ export const HealthCheckHandler: RequestHandler = (req: Request, res: Response):
     status: 'OK',
     data: {
       message: 'Alive',
+      statusCode: HttpStatusCode.OK,
     },
   };
   res.status(HttpStatusCode.OK).json(responseMessage);
