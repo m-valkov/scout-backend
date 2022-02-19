@@ -2,7 +2,8 @@
   "semi": true,
   "trailingComma": "all",
   "singleQuote": true,
-  "printWidth": 280,
+  "proseWrap": "never",
   "tabWidth": 2,
   "arrowParens": "avoid"
+
 }
