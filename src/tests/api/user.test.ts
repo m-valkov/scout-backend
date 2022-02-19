@@ -15,6 +15,9 @@ const prefix = config.ApiConfig.API_PREFIX;
 const mApp = new App().httpServer.server;
 
 describe(`POST /user`, () => {
+  afterAll(() => {
+    mApp.close();
+  });
   it('should retun 400 with empty body', async () => {
     await request(mApp)
       .post(`${prefix}/user`)
