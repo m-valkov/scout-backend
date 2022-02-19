@@ -11,8 +11,27 @@ export interface IWrite<T> {
   delete(id: string): Promise<void>;
 }
 
+export interface IMongoDbRepository<T> {
+  create(model: T): Promise<Error | void>;
+  // update()
+  // delete()
+  // find()
+  // findOne()
+}
+
+export abstract class BaseMongoRepository<T> implements IMongoDbRepository<T> {
+  private _model: Model<T>;
+
+  constructor(model: Model<T>) {
+    this._model = model;
+  }
+  async create(model: T): Promise<void | Error> {
+    return this._model.create(model).catch(err => err);
+  }
+}
+
 // T- это интерфейс модели
-export abstract class BaseRepository<T> implements IRead<T>, IWrite<T> {
+export abstract class BaseMongoDBRepository<T> implements IRead<T>, IWrite<T> {
   private _model: Model<T>;
 
   constructor(model: Model<T>) {

@@ -3,6 +3,6 @@ import { UserRepository } from './user.repository';
 
 const repository = new UserRepository();
 
-export const createNewUser = (user: IUser) => {
-  repository.create(user);
+export const createNewUser = async (user: IUser): Promise<void | Error> => {
+  return repository.create(user).catch(err => err);
 };

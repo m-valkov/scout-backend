@@ -1,6 +1,6 @@
-import { BaseRepository } from '../../types/repository';
+import { BaseMongoRepository } from '../../types/repository';
 import { User, IUser } from './user.model';
-export class UserRepository extends BaseRepository<IUser> {
+export class UserRepository extends BaseMongoRepository<IUser> {
   constructor() {
     super(User);
   }
