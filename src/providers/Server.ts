@@ -15,7 +15,9 @@ export class ExpressServer implements IServer {
     return this;
   }
   close(): void {
-    this.server.close();
+    this.server.close(() => {
+      DebugLogger.debug('Http server closed');
+    });
   }
   mountPreMiddleware(m: Middleware[]): IServer {
     this._app.use(m);
