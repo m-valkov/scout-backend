@@ -19,7 +19,7 @@
   "author": "Mikhail Valkov",
   "license": "MIT",
   "engines": {
-    "node": "^16.14.0"
+    "node": "^16.13.1"
   },
   "devDependencies": {
     "@types/compression": "^1.7.2",
