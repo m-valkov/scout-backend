@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Api as ApiRouter } from '../routes/Api';
+import { Api as ApiRouter } from '../../routes/Api';
 import { ApiDocHandler } from '../handlers/ApiDocHandler';
 import { HealthCheckHandler } from '../handlers/HealthCheck';
 import { Config } from './Config';

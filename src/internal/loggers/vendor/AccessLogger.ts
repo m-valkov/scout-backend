@@ -1,11 +1,19 @@
-import { createLogger, transports, LoggerOptions, Logger, format } from 'winston';
+import {
+  createLogger,
+  transports,
+  LoggerOptions,
+  Logger,
+  format,
+} from 'winston';
 import { Config } from '../../providers/Config';
 
 const { combine, printf } = format;
 const config = new Config();
 
 const accessLoggerOptions: LoggerOptions = {
-  format: combine(printf(info => `${info.level.toUpperCase()}: ${info.message}`)),
+  format: combine(
+    printf(info => `${info.level.toUpperCase()}: ${info.message}`),
+  ),
   transports: [
     new transports.File({
       level: 'info',

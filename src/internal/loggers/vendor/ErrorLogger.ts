@@ -13,7 +13,10 @@ const config = new Config();
 const errorLoggerOptions: winston.LoggerOptions = {
   format: combine(
     timestamp({ format: 'DD.MM.YYYY HH:mm:ss' }),
-    printf(info => `${info.level.toUpperCase()} :: ${info.timestamp} :: ${info.message}`),
+    printf(
+      info =>
+        `${info.level.toUpperCase()} :: ${info.timestamp} :: ${info.message}`,
+    ),
   ),
   transports: [
     new winston.transports.File({

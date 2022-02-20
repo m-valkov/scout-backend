@@ -27,7 +27,12 @@ class Logger implements ILogger {
   async log(err: BaseError, req?: Request): Promise<void> {
     DebugLogger.debug('Send error to telegram chanel');
     const message = this._prepareMessage(err, req);
-    await this._telegraf.telegram.sendMessage(this._chatID, message, { parse_mode: 'MarkdownV2' });
+    await this._telegraf.telegram.sendMessage(this._chatID, message, {
+      parse_mode: 'MarkdownV2',
+    });
   }
 }
-export const TelegramLogger: ILogger = new Logger(config.LoggerConfig.TELEGRAM_BOT_TOKEN, config.LoggerConfig.TELEGRAM_CHAT_ID);
+export const TelegramLogger: ILogger = new Logger(
+  config.LoggerConfig.TELEGRAM_BOT_TOKEN,
+  config.LoggerConfig.TELEGRAM_CHAT_ID,
+);

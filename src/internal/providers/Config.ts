@@ -1,4 +1,12 @@
-import { IApiConfig, IAppConfig, IConfig, IDbConfig, IHttpConfig, ILoggerConfig, ISwaggerConfig } from '../types/config';
+import {
+  IApiConfig,
+  IAppConfig,
+  IConfig,
+  IDbConfig,
+  IHttpConfig,
+  ILoggerConfig,
+  ISwaggerConfig,
+} from '../types/config';
 import { AppConfig } from '../configurations/App';
 import { ApiConfig } from '../configurations/Api';
 import { HttpConfig } from '../configurations/Http';

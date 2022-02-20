@@ -1,4 +1,10 @@
-import { createLogger, transports, LoggerOptions, Logger, format } from 'winston';
+import {
+  createLogger,
+  transports,
+  LoggerOptions,
+  Logger,
+  format,
+} from 'winston';
 import { Config } from '../../providers/Config';
 
 const { combine, printf, timestamp, colorize } = format;

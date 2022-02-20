@@ -1,5 +1,5 @@
 import * as ProcessControl from '../helpers/vendor/ProcessControl';
-import * as DataBase from '../providers/Database';
+import * as DataBase from './Database';
 import { Server } from 'http';
 import { DebugLogger } from '../loggers/vendor/DebugLogger';
 import express, { Application, ErrorRequestHandler, Router } from 'express';

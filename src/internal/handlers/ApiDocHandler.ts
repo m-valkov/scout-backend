@@ -31,4 +31,9 @@ const swaggerSpec = swaggerJSDoc(jsdocOptions);
 
 export const ApiDocHandler: Router = Router();
 
-ApiDocHandler.use(config.SwaggerConfig.DOCS_ENDPOINT, BasicAuth, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+ApiDocHandler.use(
+  config.SwaggerConfig.DOCS_ENDPOINT,
+  BasicAuth,
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec),
+);

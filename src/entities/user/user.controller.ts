@@ -1,12 +1,16 @@
 import { RequestHandler, Request, Response, NextFunction } from 'express';
-import { HttpStatusCode } from '../../configurations/HttpStatusCode';
-import { BadRequestError } from '../../exceptions/BadRequest';
-import { ResponseMessage } from '../../types/responses';
+import { HttpStatusCode } from '../../internal/configurations/HttpStatusCode';
+import { BadRequestError } from '../../internal/exceptions/BadRequest';
+import { ResponseMessage } from '../../internal/types/responses';
 import { isEmpty, isUser } from './user.validators';
 import { createNewUser } from './user.service';
 import { IUser } from './user.model';
 
-export const NewUser: RequestHandler = (req: Request, res: Response, next: NextFunction): void => {
+export const NewUser: RequestHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   if (isEmpty(req.body) || !isUser(req.body)) {
     const err = new BadRequestError('Is not valid payload');
     next(err);

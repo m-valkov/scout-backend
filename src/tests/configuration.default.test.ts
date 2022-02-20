@@ -1,4 +1,4 @@
-import { Config } from '../providers/Config';
+import { Config } from '../internal/providers/Config';
 
 describe('Configuration', () => {
   test('should use the default values', async () => {

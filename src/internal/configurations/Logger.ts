@@ -19,9 +19,13 @@ export class LoggerConfig implements ILoggerConfig {
   }
 
   private _init(env: ProcessEnv) {
-    this.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES = Number(env.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES || 10_485_760);
+    this.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES = Number(
+      env.ACCESS_LOG_MAX_FILE_SIZE_IN_BYTES || 10_485_760,
+    );
     this.ACCESS_LOG_MAX_FILES = Number(env.ACCESS_LOG_MAX_FILES) || 5;
-    this.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES = Number(env.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES || 10_485_760);
+    this.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES = Number(
+      env.ERROR_LOG_MAX_FILE_SIZE_IN_BYTES || 10_485_760,
+    );
     this.ERROR_LOG_MAX_FILES = Number(env.ERROR_LOG_MAX_FILES) || 5;
     this.SENTRY_DSN = env.SENTRY_DSN || '';
     this.TELEGRAM_BOT_TOKEN = env.TELEGRAM_BOT_TOKEN || 'token';

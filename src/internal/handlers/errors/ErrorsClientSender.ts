@@ -2,7 +2,12 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { BaseError } from '../../exceptions/BaseError';
 import { ResponseMessage } from '../../types/responses';
 
-export const ErrorClientSender: ErrorRequestHandler = (err: BaseError, _req: Request, res: Response, next: NextFunction): void => {
+export const ErrorClientSender: ErrorRequestHandler = (
+  err: BaseError,
+  _req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   const responseMessage: ResponseMessage = {
     status: 'FAIL',
     error: {

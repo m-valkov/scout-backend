@@ -1,7 +1,10 @@
 import { Request } from 'express';
 import { BaseError } from '../exceptions/BaseError';
 
-export const makeMessageFromErrorAndRequest = (err: BaseError, req?: Request): string => {
+export const makeMessageFromErrorAndRequest = (
+  err: BaseError,
+  req?: Request,
+): string => {
   let url = 'Undefined url';
   let headers = 'Undefined headers';
   let body = 'Undefined body';

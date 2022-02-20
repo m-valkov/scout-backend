@@ -1,5 +1,7 @@
 import { Middleware } from '../../types/express';
-import expressBasicAuth, { BasicAuthMiddlewareOptions } from 'express-basic-auth';
+import expressBasicAuth, {
+  BasicAuthMiddlewareOptions,
+} from 'express-basic-auth';
 import { Config } from '../../providers/Config';
 
 const config = new Config();

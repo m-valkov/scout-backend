@@ -1,9 +1,12 @@
 import 'dotenv/config';
-import { ExpressServer } from './providers/Server';
-import { PreMiddlewares, PostMiddlewares } from './providers/Middlewares';
-import { Routes } from './providers/Routes';
-import { ErrorHandlers } from './providers/ErrorHandlers';
-import { Config } from './providers/Config';
+import { ExpressServer } from './internal/providers/Server';
+import {
+  PreMiddlewares,
+  PostMiddlewares,
+} from './internal/providers/Middlewares';
+import { Routes } from './internal/providers/Routes';
+import { ErrorHandlers } from './internal/providers/ErrorHandlers';
+import { Config } from './internal/providers/Config';
 
 const config = new Config();
 const server = new ExpressServer();
