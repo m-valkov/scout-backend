@@ -6,5 +6,15 @@ import { JsonBodyParser } from '../middlewares/vendor/JsonBodyParser';
 import { Logger } from '../middlewares/vendor/AccessLogger';
 import { RateLimit } from '../middlewares/vendor/RateLimit';
 import { UrlParser } from '../middlewares/vendor/UrlParser';
+import { Api404Handler } from '../handlers/errors/Api404Handler';
 
-export const Middlewares: Middleware[] = [RateLimit, UrlParser, CORS, Helmet, JsonBodyParser, Compression, Logger];
+export const PreMiddlewares: Middleware[] = [
+  RateLimit,
+  UrlParser,
+  CORS,
+  Helmet,
+  JsonBodyParser,
+  Compression,
+  Logger,
+];
+export const PostMiddlewares: Middleware[] = [Api404Handler];
