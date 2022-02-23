@@ -34,5 +34,10 @@ describe('Configuration', () => {
     expect(c.SwaggerConfig.DOCS_ENDPOINT).toBe('/docs');
 
     expect(c.DbConfig.MONGO_DB_URI).toBe('');
+
+    expect(c.EntityConfig.USER_LOGIN_MIN_LENGHT).toBe(1);
+    expect(c.EntityConfig.USER_LOGIN_MAX_LENGHT).toBe(32);
+    expect(c.EntityConfig.USER_PASSWORD_MIN_LENGHT).toBe(10);
+    expect(c.EntityConfig.USER_PASSWORD_MAX_LENGHT).toBe(128);
   });
 });
