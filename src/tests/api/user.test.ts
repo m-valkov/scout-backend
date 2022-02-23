@@ -15,7 +15,7 @@ const config = new Config();
 const app = new ExpressServer();
 const prefix = config.ApiConfig.API_PREFIX;
 
-describe(`POST /user`, () => {
+describe('POST /user', () => {
   beforeAll(() => {
     app
       .mountPreMiddleware(PreMiddlewares)
