@@ -6,25 +6,25 @@ const _c = new Config().EntityConfig;
 
 export const hasValidName = (name: unknown): name is UserParams['name'] => {
   return (
-    typeof name === 'string' &&
-    name.length >= _c.USER_LOGIN_MIN_LENGTH &&
-    name.length <= _c.USER_LOGIN_MAX_LENGTH
+    typeof name === 'string'
+    && name.length >= _c.USER_LOGIN_MIN_LENGTH
+    && name.length <= _c.USER_LOGIN_MAX_LENGTH
   );
 };
 
 export const hasValidPassword = (password: unknown): password is UserParams['password'] => {
   return (
-    typeof password === 'string' &&
-    password.length >= _c.USER_PASSWORD_MIN_LENGTH &&
-    password.length <= _c.USER_PASSWORD_MAX_LENGTH
+    typeof password === 'string'
+    && password.length >= _c.USER_PASSWORD_MIN_LENGTH
+    && password.length <= _c.USER_PASSWORD_MAX_LENGTH
   );
 };
 
 export const isValid = (payload: unknown): payload is UserParams => {
   return (
-    isObject(payload) &&
-    hasValidName(payload['name']) &&
-    hasValidPassword(payload['password']) &&
-    Object.keys(payload).length === 2
+    isObject(payload)
+    && hasValidName(payload['name'])
+    && hasValidPassword(payload['password'])
+    && Object.keys(payload).length === 2
   );
 };
