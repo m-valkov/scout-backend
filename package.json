@@ -9,7 +9,8 @@
     "post-build": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json && cd dist && npm ci --production",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "stage": "node index.js",
-    "make-badges": "istanbul-badges-readme && git add 'README.md'"
+    "make-badges": "istanbul-badges-readme && git add 'README.md'",
+    "make-docs":"npx typedoc --entryPoints src --entryPointStrategy expand --out docs --plugin ./node_modules/typedoc-theme-hierarchy/dist/index.js --theme hierarchy && git add docs/"
   },
   "keywords": [
     "typescript",
