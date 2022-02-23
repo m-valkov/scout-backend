@@ -5,6 +5,7 @@ export interface IConfig {
   LoggerConfig: ILoggerConfig;
   SwaggerConfig: ISwaggerConfig;
   DbConfig: IDbConfig;
+  EntityConfig: IEntityConfig;
 }
 
 export interface IApiConfig {
@@ -40,6 +41,13 @@ export interface ISwaggerConfig {
   SERVER_URL: string;
   SERVER_DESCRIPTION: string;
   DOCS_ENDPOINT: string;
+}
+
+export interface IEntityConfig {
+  USER_LOGIN_MIN_LENGHT: number;
+  USER_LOGIN_MAX_LENGHT: number;
+  USER_PASSWORD_MIN_LENGHT: number;
+  USER_PASSWORD_MAX_LENGHT: number;
 }
 
 export interface ProcessEnv {

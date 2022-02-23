@@ -3,6 +3,7 @@ import {
   IAppConfig,
   IConfig,
   IDbConfig,
+  IEntityConfig,
   IHttpConfig,
   ILoggerConfig,
   ISwaggerConfig,
@@ -13,6 +14,7 @@ import { HttpConfig } from '../configurations/Http';
 import { LoggerConfig } from '../configurations/Logger';
 import { SwaggerConfig } from '../configurations/Swagger';
 import { DbConfig } from '../configurations/DataBase';
+import { EntityConfig } from '../configurations/Entity';
 
 export class Config implements IConfig {
   public static _instance: Config | undefined;
@@ -22,6 +24,7 @@ export class Config implements IConfig {
   public LoggerConfig!: ILoggerConfig;
   public SwaggerConfig!: ISwaggerConfig;
   public DbConfig!: IDbConfig;
+  public EntityConfig!: IEntityConfig;
 
   constructor() {
     if (Config._instance) {
@@ -36,6 +39,7 @@ export class Config implements IConfig {
     this.LoggerConfig = new LoggerConfig(env);
     this.SwaggerConfig = new SwaggerConfig(env, this);
     this.DbConfig = new DbConfig(env);
+    this.EntityConfig = new EntityConfig(env);
 
     Config._instance = this;
   }

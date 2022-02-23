@@ -30,6 +30,11 @@ describe('Configuration', () => {
 
     process.env.MONGO_DB_URI = 'uri';
 
+    process.env.USER_LOGIN_MIN_LENGHT = '2';
+    process.env.USER_LOGIN_MAX_LENGHT = '64';
+    process.env.USER_PASSWORD_MIN_LENGHT = '20';
+    process.env.USER_PASSWORD_MAX_LENGHT = '256';
+
     const c: Config = new Config();
 
     expect(c.ApiConfig.API_PREFIX).toBe('/api/v1');
@@ -62,5 +67,10 @@ describe('Configuration', () => {
     expect(c.SwaggerConfig.DOCS_ENDPOINT).toBe('/docs1');
 
     expect(c.DbConfig.MONGO_DB_URI).toBe('uri');
+
+    expect(c.EntityConfig.USER_LOGIN_MIN_LENGHT).toBe(2);
+    expect(c.EntityConfig.USER_LOGIN_MAX_LENGHT).toBe(64);
+    expect(c.EntityConfig.USER_PASSWORD_MIN_LENGHT).toBe(20);
+    expect(c.EntityConfig.USER_PASSWORD_MAX_LENGHT).toBe(256);
   });
 });
