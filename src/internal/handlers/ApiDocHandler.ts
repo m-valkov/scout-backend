@@ -1,4 +1,3 @@
-import { SwaggerConfig } from '../configurations/Swagger';
 import { BasicAuth } from '../middlewares/vendor/BasicAuth';
 import swaggerJSDoc, { Options, SwaggerDefinition } from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
