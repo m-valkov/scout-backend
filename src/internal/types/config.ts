@@ -44,10 +44,10 @@ export interface ISwaggerConfig {
 }
 
 export interface IEntityConfig {
-  USER_LOGIN_MIN_LENGHT: number;
-  USER_LOGIN_MAX_LENGHT: number;
-  USER_PASSWORD_MIN_LENGHT: number;
-  USER_PASSWORD_MAX_LENGHT: number;
+  USER_LOGIN_MIN_LENGTH: number;
+  USER_LOGIN_MAX_LENGTH: number;
+  USER_PASSWORD_MIN_LENGTH: number;
+  USER_PASSWORD_MAX_LENGTH: number;
 }
 
 export interface ProcessEnv {

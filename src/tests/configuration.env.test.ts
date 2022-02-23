@@ -30,10 +30,10 @@ describe('Configuration', () => {
 
     process.env.MONGO_DB_URI = 'uri';
 
-    process.env.USER_LOGIN_MIN_LENGHT = '2';
-    process.env.USER_LOGIN_MAX_LENGHT = '64';
-    process.env.USER_PASSWORD_MIN_LENGHT = '20';
-    process.env.USER_PASSWORD_MAX_LENGHT = '256';
+    process.env.USER_LOGIN_MIN_LENGTH = '2';
+    process.env.USER_LOGIN_MAX_LENGTH = '64';
+    process.env.USER_PASSWORD_MIN_LENGTH = '20';
+    process.env.USER_PASSWORD_MAX_LENGTH = '256';
 
     const c: Config = new Config();
 
@@ -68,9 +68,9 @@ describe('Configuration', () => {
 
     expect(c.DbConfig.MONGO_DB_URI).toBe('uri');
 
-    expect(c.EntityConfig.USER_LOGIN_MIN_LENGHT).toBe(2);
-    expect(c.EntityConfig.USER_LOGIN_MAX_LENGHT).toBe(64);
-    expect(c.EntityConfig.USER_PASSWORD_MIN_LENGHT).toBe(20);
-    expect(c.EntityConfig.USER_PASSWORD_MAX_LENGHT).toBe(256);
+    expect(c.EntityConfig.USER_LOGIN_MIN_LENGTH).toBe(2);
+    expect(c.EntityConfig.USER_LOGIN_MAX_LENGTH).toBe(64);
+    expect(c.EntityConfig.USER_PASSWORD_MIN_LENGTH).toBe(20);
+    expect(c.EntityConfig.USER_PASSWORD_MAX_LENGTH).toBe(256);
   });
 });
