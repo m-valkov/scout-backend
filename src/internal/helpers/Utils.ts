@@ -18,3 +18,7 @@ export const makeMessageFromErrorAndRequest = (
 
   return `$\n${stack}\n\n${url}\n\n${headers}\n\n${body}`;
 };
+
+export const isObject = (value: unknown): value is Record<string, unknown> => {
+  return typeof value === 'object' && value !== null;
+};
