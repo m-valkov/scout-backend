@@ -1,4 +1,5 @@
 import { AccessLogger } from '../../loggers/vendor/AccessLogger';
+import { Request } from 'express';
 import morgan from 'morgan';
 import { Middleware } from '../../types/express';
 import { DebugLogger } from '../../loggers/vendor/DebugLogger';
@@ -11,5 +12,7 @@ class MorganStream {
 }
 
 const stream = new MorganStream();
-
-export const Logger: Middleware = morgan('combined', { stream });
+const skip = (req: Request): boolean => {
+  return req.originalUrl.startsWith('/health');
+};
+export const Logger: Middleware = morgan('combined', { stream, skip });
