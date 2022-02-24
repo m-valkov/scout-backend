@@ -3,6 +3,7 @@ import { isObject } from '../../internal/helpers/Utils';
 import { Config } from '../../internal/providers/Config';
 
 const _c = new Config().EntityConfig;
+const _propsLimit = 2;
 
 export const hasValidName = (name: unknown): name is UserParams['name'] => {
   return (
@@ -25,6 +26,6 @@ export const isValid = (payload: unknown): payload is UserParams => {
     isObject(payload)
     && hasValidName(payload['name'])
     && hasValidPassword(payload['password'])
-    && Object.keys(payload).length === 2
+    && Object.keys(payload).length === _propsLimit
   );
 };
