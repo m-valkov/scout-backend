@@ -58,6 +58,6 @@ jobs:
           -e DOMAIN=${{secrets.DOMAIN}}
           -e SENTRY_DSN=${{secrets.SENTRY_DSN}}
           -e TELEGRAM_BOT_TOKEN=${{secrets.TELEGRAM_BOT_TOKEN}}
-          -e MONGO_DB_URI=${{secrets.MONGO_DB_URI}}
+          -e MONGO_DB_URI="${{secrets.MONGO_DB_URI}}"
           -v ~/logs/scout-stage:/usr/src/app/logs
           -d ghcr.io/${{github.repository}}:${{github.ref_name}}-stage
