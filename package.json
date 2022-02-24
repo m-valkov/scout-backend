@@ -1,6 +1,6 @@
 {
   "name": "scratch",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "stage": "node index.js",
     "make-badges": "istanbul-badges-readme && git add 'README.md'",
-    "make-docs":"npx typedoc --entryPoints src --entryPointStrategy expand --out docs --plugin ./node_modules/typedoc-theme-hierarchy/dist/index.js --theme hierarchy && git add docs/"
+    "make-docs": "npx typedoc --entryPoints src --entryPointStrategy expand --out docs --plugin ./node_modules/typedoc-theme-hierarchy/dist/index.js --theme hierarchy && git add docs/"
   },
   "keywords": [
     "typescript",
